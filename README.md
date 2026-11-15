@@ -44,3 +44,9 @@ docker run --rm -p 8080:8080 portfolio     # http://localhost:8080
 `/` → `/pt` ou `/en` (idioma do navegador) · `/{lang}` · `/{lang}/services` · `/{lang}/cases` ·
 `/{lang}/articles` · `/{lang}/articles/{slug}` · `/{lang}/about` · `/{lang}/contact` ·
 `/sitemap.xml` · `/robots.txt` · `/healthz`
+
+## Licença / License
+
+© Teo Prace. Todos os direitos reservados. Código público para fins de portfólio; textos, marca e logos não podem ser reutilizados.
+
+© Teo Prace. All rights reserved. Code is public for portfolio purposes; text, brand and logos may not be reused.
