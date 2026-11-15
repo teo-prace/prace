@@ -1,0 +1,28 @@
+@{
+    var changes = C.Home.Changes;
+}
+
+<section class="sec">
+    <div class="wrap split">
+        <div class="split-intro">
+            <p class="sec-tag">@changes.Tag</p>
+            <h2 class="title">@Rich.Render(changes.Title)</h2>
+            <p class="body-text">@Rich.Render(changes.Text)</p>
+        </div>
+        <ol class="stack-list">
+            @for (var i = 0; i < changes.Items.Count; i++)
+            {
+                var item = changes.Items[i];
+                <li class="stack-card">
+                    <span class="num">@((i + 1).ToString("00"))</span>
+                    <h3>@item.From <span class="arrow">→</span> @item.To</h3>
+                    <p>@item.Text</p>
+                </li>
+            }
+        </ol>
+    </div>
+</section>
+
+@code {
+    [Parameter, EditorRequired] public SiteContent C { get; set; } = default!;
+}

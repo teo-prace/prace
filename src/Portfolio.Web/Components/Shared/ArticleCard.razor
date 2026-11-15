@@ -1,0 +1,22 @@
+<a class="cell cell-link" href="/@Lang/articles/@Article.Slug">
+    <span class="num">
+        <time datetime="@Article.Date.ToString("yyyy-MM-dd")">@FormatDate(Article.Date, Lang)</time>
+        @if (Article.Draft)
+        {
+            <span class="badge">@C.Articles.Draft</span>
+        }
+    </span>
+    <h3>@Article.Title</h3>
+    <p>@Article.Summary</p>
+    <span class="cell-more mono-label">@C.Articles.ReadMore →</span>
+</a>
+
+@code {
+    [Parameter, EditorRequired] public string Lang { get; set; } = "";
+    [Parameter, EditorRequired] public Article Article { get; set; } = default!;
+    [Parameter, EditorRequired] public SiteContent C { get; set; } = default!;
+
+    public static string FormatDate(DateOnly date, string lang) =>
+        date.ToString(lang == "pt" ? "dd MMM yyyy" : "MMM dd, yyyy",
+            System.Globalization.CultureInfo.GetCultureInfo(ContentService.HtmlLang(lang)));
+}

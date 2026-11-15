@@ -1,0 +1,26 @@
+<article class="case-card">
+    <header class="case-head">
+        <span class="mono-label">@Item.Client</span>
+        <h3>@Item.Title</h3>
+    </header>
+    <dl class="case-rows">
+        <div><dt>@Labels.Context</dt><dd>@Item.Context</dd></div>
+        <div><dt>@Labels.Challenge</dt><dd>@Item.Challenge</dd></div>
+        <div><dt>@Labels.Solution</dt><dd>@Item.Solution</dd></div>
+        <div><dt>@Labels.Result</dt><dd>@Item.Result</dd></div>
+    </dl>
+    @if (Item.Tags.Count > 0)
+    {
+        <ul class="chips">
+            @foreach (var tag in Item.Tags)
+            {
+                <li>@tag</li>
+            }
+        </ul>
+    }
+</article>
+
+@code {
+    [Parameter, EditorRequired] public CaseItem Item { get; set; } = default!;
+    [Parameter, EditorRequired] public CaseLabels Labels { get; set; } = default!;
+}

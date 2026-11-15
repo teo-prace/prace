@@ -1,0 +1,18 @@
+@page "/{Lang}/cases"
+@inherits LocalizedPage
+
+<PageTitle>@C.Nav.Cases · @Brand</PageTitle>
+
+<PageHero Lang="@Lang" Home="@C.Nav.Home" Crumb="@C.Nav.Cases" Title="@C.Cases.Title" Lead="@C.Cases.Intro" />
+
+<section class="sec">
+    <div class="wrap case-list">
+        @foreach (var item in C.Cases.Items)
+        {
+            <CaseCard Item="item" Labels="C.Cases.Labels" />
+        }
+    </div>
+</section>
+
+<TestimonialsSection C="C" />
+<ClosingSection Lang="@Lang" C="C" />

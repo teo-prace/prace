@@ -1,0 +1,49 @@
+@{
+    var audit = C.Home.Audit;
+}
+
+<section class="sec hero">
+    <div class="wrap hero-grid">
+        <div class="hero-copy">
+            <p class="breadcrumb">@C.Home.Breadcrumb</p>
+            <h1 class="display">@Rich.Render(C.Home.Headline)</h1>
+            <p class="lead">@Rich.Render(C.Home.Lead)</p>
+            <div class="actions">
+                <a class="btn btn-light btn-lg" href="/@Lang/contact">@C.Home.CtaPrimary</a>
+                <a class="btn btn-gray btn-lg" href="#process">@C.Home.CtaSecondary</a>
+            </div>
+        </div>
+
+        <aside class="terminal" aria-label="@audit.Title">
+            <div class="terminal-bar">
+                <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="terminal-title">@audit.Title</span>
+                <span class="terminal-count"><i class="dot-red" aria-hidden="true"></i>@audit.Counter</span>
+            </div>
+            @foreach (var group in audit.Groups)
+            {
+                <div class="terminal-group">@group.Name</div>
+                @foreach (var row in group.Rows)
+                {
+                    <div class="terminal-row">
+                        <i class="dot-red" aria-hidden="true"></i>
+                        <span class="t-name">@row.Name</span>
+                        <span class="t-detail">@row.Detail</span>
+                        <span class="t-value">@row.Value</span>
+                    </div>
+                }
+            }
+            <div class="terminal-foot">
+                @foreach (var line in audit.Footer)
+                {
+                    <span>@line</span>
+                }
+            </div>
+        </aside>
+    </div>
+</section>
+
+@code {
+    [Parameter, EditorRequired] public string Lang { get; set; } = "";
+    [Parameter, EditorRequired] public SiteContent C { get; set; } = default!;
+}

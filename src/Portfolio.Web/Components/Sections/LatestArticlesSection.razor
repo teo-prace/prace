@@ -1,0 +1,29 @@
+@inject ArticleService Articles
+@inject IOptions<FeatureOptions> Features
+
+@{
+    var latest = Features.Value.Articles ? Articles.List(Lang).Take(3).ToList() : [];
+}
+
+@if (latest.Count > 0)
+{
+    <section class="sec">
+        <div class="wrap">
+            <div class="sec-head">
+                <p class="sec-tag">@C.Home.LatestArticlesTag</p>
+                <h2 class="title">@Rich.Render(C.Home.LatestArticlesTitle)</h2>
+            </div>
+            <div class="cell-grid">
+                @foreach (var article in latest)
+                {
+                    <ArticleCard Lang="@Lang" Article="article" C="C" />
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@code {
+    [Parameter, EditorRequired] public string Lang { get; set; } = "";
+    [Parameter, EditorRequired] public SiteContent C { get; set; } = default!;
+}

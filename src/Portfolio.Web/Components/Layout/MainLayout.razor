@@ -1,0 +1,109 @@
+﻿@inherits LayoutComponentBase
+@inject ContentService ContentService
+@inject ArticleService Articles
+@inject NavigationManager Nav
+@inject IOptions<SiteOptions> Site
+@inject IOptions<FeatureOptions> Features
+
+@{
+    var path = "/" + Nav.ToBaseRelativePath(Nav.Uri).Split('?', '#')[0];
+    var lang = ContentService.LanguageFromPath(path);
+    var other = lang == "pt" ? "en" : "pt";
+    var c = ContentService.Get(lang);
+    var showArticles = Features.Value.Articles && Articles.List(lang).Count > 0;
+}
+
+<div class="site">
+    <a class="skip-link" href="#content">@(lang == "pt" ? "Pular para o conteúdo" : "Skip to content")</a>
+
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <BrandMark Lang="@lang" />
+
+            <nav class="nav" aria-label="Main">
+                <div class="nav-item has-dropdown">
+                    <a href="/@lang/services">@c.Nav.Services <span class="caret" aria-hidden="true">▾</span></a>
+                    <div class="dropdown">
+                        @foreach (var s in c.Services.Items)
+                        {
+                            <a href="/@lang/services#@s.Id">
+                                <strong>@s.Title</strong>
+                                <span>@s.Summary</span>
+                            </a>
+                        }
+                    </div>
+                </div>
+                <a class="nav-item" href="/@lang#process">@c.Nav.Process</a>
+                <a class="nav-item" href="/@lang/cases">@c.Nav.Cases</a>
+                @if (showArticles)
+                {
+                    <a class="nav-item" href="/@lang/articles">@c.Nav.Articles</a>
+                }
+                <a class="nav-item" href="/@lang/about">@c.Nav.About</a>
+            </nav>
+
+            <div class="header-actions">
+                <a class="icon-btn mono" href="@ContentService.SwitchLanguagePath(path, other)" hreflang="@ContentService.HtmlLang(other)">@c.Nav.SwitchLanguage</a>
+                <button type="button" class="icon-btn" data-theme-toggle aria-label="@c.Nav.ThemeToggle" title="@c.Nav.ThemeToggle">
+                    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" /></svg>
+                </button>
+                <a class="btn btn-green hide-sm" href="/@lang/cases">@c.Nav.CtaSecondary</a>
+                <a class="btn btn-light hide-sm" href="/@lang/contact">@c.Nav.CtaPrimary</a>
+
+                <details class="mobile-menu">
+                    <summary class="icon-btn" aria-label="@c.Nav.Menu">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+                    </summary>
+                    <div class="mobile-panel">
+                        <span class="mono-label">@c.Nav.Services</span>
+                        @foreach (var s in c.Services.Items)
+                        {
+                            <a href="/@lang/services#@s.Id">@s.Title</a>
+                        }
+                        <span class="mono-label">@c.Nav.Menu</span>
+                        <a href="/@lang#process">@c.Nav.Process</a>
+                        <a href="/@lang/cases">@c.Nav.Cases</a>
+                        @if (showArticles)
+                        {
+                            <a href="/@lang/articles">@c.Nav.Articles</a>
+                        }
+                        <a href="/@lang/about">@c.Nav.About</a>
+                        <a class="btn btn-light" href="/@lang/contact">@c.Nav.CtaPrimary</a>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </header>
+
+    <main id="content">
+        @Body
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <div>
+                @* Rodapé: sempre o horizontal completo (4m/4n), com o subtítulo no idioma da página. *@
+                <a class="footer-logo" href="/@lang" aria-label="@(lang == "pt" ? "Prace — início" : "Prace — home")">
+                    <PraceLogo Variant="horizontal" Subtitle="@(lang == "pt" ? "TEO PRACE · MODERNIZAÇÃO DE LEGADO" : "TEO PRACE · LEGACY MODERNIZATION")" />
+                </a>
+                <p class="footer-tagline">@c.Footer.Tagline</p>
+            </div>
+            <nav class="footer-links" aria-label="Footer">
+                <a href="/@lang/services">@c.Nav.Services</a>
+                <a href="/@lang/cases">@c.Nav.Cases</a>
+                <a href="/@lang/about">@c.Nav.About</a>
+                <a href="/@lang/contact">@c.Nav.Contact</a>
+                @if (!string.IsNullOrEmpty(Site.Value.LinkedInUrl))
+                {
+                    <a href="@Site.Value.LinkedInUrl" rel="noopener" target="_blank">LinkedIn</a>
+                }
+                @if (!string.IsNullOrEmpty(Site.Value.GitHubUrl))
+                {
+                    <a href="@Site.Value.GitHubUrl" rel="noopener" target="_blank">GitHub</a>
+                }
+            </nav>
+            <p class="mono-label footer-copy">© @DateTime.UtcNow.Year @Site.Value.Brand</p>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,60 @@
+@page "/{Lang}/articles/{Slug}"
+@inherits LocalizedPage
+@inject ArticleService ArticleService
+@inject IOptions<FeatureOptions> Features
+
+@if (article is not null)
+{
+    <PageTitle>@article.Title · @Brand</PageTitle>
+    <HeadContent>
+        <meta name="description" content="@article.Summary" />
+    </HeadContent>
+
+    <section class="sec hero hero-page">
+        <div class="wrap narrow">
+            <p class="breadcrumb"><a href="/@Lang">@C.Nav.Home</a> / <a href="/@Lang/articles">@C.Nav.Articles</a></p>
+            <h1 class="display display-md">@article.Title</h1>
+            <p class="lead">@article.Summary</p>
+            <p class="article-meta mono-label">
+                <time datetime="@article.Date.ToString("yyyy-MM-dd")">@ArticleCard.FormatDate(article.Date, Lang)</time>
+                @foreach (var tag in article.Tags)
+                {
+                    <span>· @tag</span>
+                }
+                @if (article.Draft)
+                {
+                    <span class="badge">@C.Articles.Draft</span>
+                }
+            </p>
+        </div>
+    </section>
+
+    <section class="sec">
+        <div class="wrap narrow">
+            <div class="prose article-body">
+                @((MarkupString)article.Html)
+            </div>
+            <p><a class="btn btn-ghost" href="/@Lang/articles">← @C.Articles.BackToList</a></p>
+        </div>
+    </section>
+}
+
+@code {
+    [Parameter] public string Slug { get; set; } = "";
+
+    private Article? article;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        article = Features.Value.Articles ? ArticleService.Find(Lang, Slug) : null;
+        if (article is not null) return;
+
+        // Artigo sem tradução neste idioma: manda para a lista em vez de dar 404.
+        var otherLang = Lang == "pt" ? "en" : "pt";
+        if (Features.Value.Articles && ArticleService.Find(otherLang, Slug) is not null)
+            Nav.NavigateTo($"/{Lang}/articles");
+        else
+            Nav.NotFound();
+    }
+}

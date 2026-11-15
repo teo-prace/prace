@@ -1,0 +1,320 @@
+@page "/brand"
+@inject IOptions<FeatureOptions> Features
+@inject NavigationManager Nav
+
+@* Página de testes da identidade visual. Só existe com Features:BrandLab = true (Development). *@
+
+<PageTitle>Laboratório de marca · Prace</PageTitle>
+<HeadContent><meta name="robots" content="noindex" /></HeadContent>
+
+<section class="sec hero hero-page">
+    <div class="wrap">
+        <p class="breadcrumb">Interno / Marca</p>
+        <h1 class="display">Laboratório <em>de marca.</em></h1>
+        <p class="lead">Escolha uma <strong>paleta</strong> e um <strong>logo</strong>. A escolha vale para o <strong>site inteiro</strong> neste navegador: navegue pelas páginas para ver como fica. Os exemplos abaixo mudam juntos.</p>
+
+        <div class="lab-controls">
+            <div class="lab-control">
+                <span class="mono-label">Paleta</span>
+                <div class="lab-options">
+                    @foreach (var p in palettes)
+                    {
+                        <button type="button" class="lab-chip" data-set-palette="@p.Id" aria-pressed="false">
+                            <span class="lab-swatch" aria-hidden="true">
+                                <i style="background:@p.Dark"></i><i style="background:@p.Light"></i>
+                            </span>
+                            @p.Name
+                        </button>
+                    }
+                </div>
+            </div>
+            <div class="lab-control">
+                <span class="mono-label">Logo no header</span>
+                <div class="lab-options">
+                    @foreach (var l in logos)
+                    {
+                        <button type="button" class="lab-chip" data-set-logo="@l.Id" aria-pressed="false">@l.Name</button>
+                    }
+                </div>
+            </div>
+            <div class="lab-control lab-control-row">
+                <button type="button" class="btn btn-gray" data-theme-toggle>Alternar tema claro/escuro</button>
+                <button type="button" class="btn btn-ghost" data-brand-reset>Voltar ao padrão do appsettings</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* ---------------------------------------------------------------- Logos *@
+<section class="sec">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-tag">Logos</p>
+            <h2 class="title">Os logos nos <em>dois tons.</em></h2>
+            <p class="body-text">Mesma geometria da spec; só as cores vêm da paleta. No tom escuro o destaque fica mais claro (e vice-versa) para manter o contraste.</p>
+        </div>
+
+        <div class="lab-logos">
+            @foreach (var l in specLogos)
+            {
+                <figure class="lab-logo-card">
+                    <div class="lab-logo-pair">
+                        <div class="tone-dark lab-logo-stage"><PraceLogo Variant="@l.Variant" Class="@l.Size" /></div>
+                        <div class="tone-light lab-logo-stage"><PraceLogo Variant="@l.Variant" Class="@l.Size" /></div>
+                    </div>
+                    <figcaption>
+                        <span class="mono-label">@l.Code</span>
+                        <strong>@l.Name</strong>
+                        <span>@l.Use</span>
+                    </figcaption>
+                </figure>
+            }
+        </div>
+    </div>
+</section>
+
+@* ---------------------------------------------------------------- Navbars *@
+<section class="sec">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-tag">Navbars</p>
+            <h2 class="title">Doze jeitos de <em>abrir o site.</em></h2>
+            <p class="body-text">Modelos estáticos (os links não navegam). Cada um traz um logo diferente; troque a paleta lá em cima e compare.</p>
+        </div>
+
+        <div class="lab-navs">
+
+            @* 01 *@
+            <LabFrame N="01" Title="Atual · escuro" Note="Compacto (4n sem subtítulo) + menu completo + dois botões. Base do site hoje.">
+                <div class="tone-dark mock-nav">
+                    <PraceLogo Variant="compact" Class="h-32" />
+                    <nav class="mock-links"><span>Serviços <small>▾</small></span><span>Como funciona</span><span>Cases</span><span>Sobre</span></nav>
+                    <div class="mock-actions"><span class="icon-btn">EN</span><span class="btn btn-green">Ver cases</span><span class="btn btn-light">Vamos conversar</span></div>
+                </div>
+            </LabFrame>
+
+            @* 02 *@
+            <LabFrame N="02" Title="Atual · claro" Note="O mesmo header no tema claro: o 4m aparece com o destaque escuro.">
+                <div class="tone-light mock-nav">
+                    <PraceLogo Variant="compact" Class="h-32" />
+                    <nav class="mock-links"><span>Serviços <small>▾</small></span><span>Como funciona</span><span>Cases</span><span>Sobre</span></nav>
+                    <div class="mock-actions"><span class="icon-btn">EN</span><span class="btn btn-green">Ver cases</span><span class="btn btn-solid">Vamos conversar</span></div>
+                </div>
+            </LabFrame>
+
+            @* 03 *@
+            <LabFrame N="03" Title="Horizontal completo" Note="4n com subtítulo. Diz o que você faz já no logo; pede um header um pouco mais alto.">
+                <div class="tone-dark mock-nav mock-tall">
+                    <PraceLogo Variant="horizontal" Subtitle="TEO PRACE · MODERNIZAÇÃO DE LEGADO" Class="h-48" />
+                    <nav class="mock-links mock-right"><span>Serviços</span><span>Cases</span><span>Sobre</span></nav>
+                    <div class="mock-actions"><span class="btn btn-light">Vamos conversar</span></div>
+                </div>
+            </LabFrame>
+
+            @* 04 *@
+            <LabFrame N="04" Title="Ponte ao centro" Note="Logo 12 centralizado, links divididos dos dois lados. Mais editorial, menos “SaaS”.">
+                <div class="tone-light mock-nav mock-center">
+                    <nav class="mock-links"><span>Serviços</span><span>Como funciona</span><span>Cases</span></nav>
+                    <PraceLogo Variant="bridge" Class="h-44" />
+                    <div class="mock-actions"><span class="mock-link">Sobre</span><span class="icon-btn">EN</span><span class="btn btn-solid">Contato →</span></div>
+                </div>
+            </LabFrame>
+
+            @* 05 *@
+            <LabFrame N="05" Title="Masthead de revista" Note="Duas linhas: logo grande no centro, menu em mono embaixo. Combina com artigos.">
+                <div class="tone-light mock-masthead">
+                    <div class="mock-masthead-top">
+                        <span class="mono-label">Modernização .NET</span>
+                        <PraceLogo Variant="bridge" Class="h-56" />
+                        <span class="mono-label mock-right-text">PT / EN</span>
+                    </div>
+                    <nav class="mock-masthead-links"><span>Serviços</span><span>Como funciona</span><span>Cases</span><span>Artigos</span><span>Sobre</span><span>Contato</span></nav>
+                </div>
+            </LabFrame>
+
+            @* 06 *@
+            <LabFrame N="06" Title="Syne minimalista" Note="Logo 8 em minúsculas, menu em mono pequeno, um único link de contato.">
+                <div class="tone-dark mock-nav">
+                    <PraceLogo Variant="syne" Class="h-30" />
+                    <nav class="mock-links mock-mono mock-right"><span>Serviços</span><span>Processo</span><span>Cases</span><span>Sobre</span></nav>
+                    <div class="mock-actions"><span class="mock-link mock-accent">Contato →</span></div>
+                </div>
+            </LabFrame>
+
+            @* 07 *@
+            <LabFrame N="07" Title="Bloco colado na borda" Note="Logo 11 ocupando a altura toda do header, como um selo. Forte e fácil de lembrar.">
+                <div class="tone-dark mock-nav mock-block">
+                    <PraceLogo Variant="stacked" Class="h-68" />
+                    <nav class="mock-links"><span>Serviços <small>▾</small></span><span>Como funciona</span><span>Cases</span><span>Sobre</span></nav>
+                    <div class="mock-actions"><span class="icon-btn">EN</span><span class="btn btn-light">Vamos conversar</span></div>
+                </div>
+            </LabFrame>
+
+            @* 08 *@
+            <LabFrame N="08" Title="Faixa de aviso + header" Note="Faixa fina em cima para um recado (agenda, artigo novo). Texto só de exemplo.">
+                <div>
+                    <div class="tone-light mock-strip"><span class="logo-dot" aria-hidden="true"></span>Exemplo de aviso · Novo artigo: migrar WebForms, por onde começar →</div>
+                    <div class="tone-dark mock-nav">
+                        <PraceLogo Variant="compact" Class="h-32" />
+                        <nav class="mock-links"><span>Serviços</span><span>Como funciona</span><span>Cases</span><span>Artigos</span></nav>
+                        <div class="mock-actions"><span class="btn btn-green">Ver cases</span><span class="btn btn-light">Vamos conversar</span></div>
+                    </div>
+                </div>
+            </LabFrame>
+
+            @* 09 *@
+            <LabFrame N="09" Title="Barra flutuante" Note="Header solto do topo, com borda, sobre a grade do hero.">
+                <div class="tone-dark mock-float-stage">
+                    <div class="mock-nav mock-float">
+                        <PraceLogo Variant="compact" Class="h-28" />
+                        <nav class="mock-links"><span>Serviços</span><span>Processo</span><span>Cases</span><span>Sobre</span></nav>
+                        <div class="mock-actions"><span class="btn btn-light">Vamos conversar</span></div>
+                    </div>
+                </div>
+            </LabFrame>
+
+            @* 10 *@
+            <LabFrame N="10" Title="Fundo na cor da marca" Note="Header inteiro na cor de destaque; o logo inverte. Chama atenção, cansa mais rápido.">
+                <div class="tone-light mock-nav mock-solid">
+                    <PraceLogo Variant="syne" Class="h-30" />
+                    <nav class="mock-links"><span>Serviços</span><span>Como funciona</span><span>Cases</span><span>Sobre</span></nav>
+                    <div class="mock-actions"><span class="btn mock-solid-btn">Vamos conversar</span></div>
+                </div>
+            </LabFrame>
+
+            @* 11 *@
+            <LabFrame N="11" Title="Selo + nome pessoal" Note="Bloco pequeno + “Teo Prace” em mono. Deixa claro que tem uma pessoa por trás.">
+                <div class="tone-light mock-nav">
+                    <span class="mock-person"><PraceLogo Variant="stacked" Class="h-40" /><span><strong>Teo Prace</strong><span class="mono-label">Modernização .NET</span></span></span>
+                    <nav class="mock-links mock-right"><span>Serviços</span><span>Cases</span><span>Artigos</span><span>Sobre</span></nav>
+                    <div class="mock-actions"><span class="btn btn-solid">Vamos conversar</span></div>
+                </div>
+            </LabFrame>
+
+            @* 12 *@
+            <LabFrame N="12" Title="Ponte compacta à esquerda" Note="Logo 12 pequeno no lugar do compacto. Mais sóbrio que o 4n.">
+                <div class="tone-dark mock-nav">
+                    <PraceLogo Variant="bridge" Class="h-38" />
+                    <nav class="mock-links"><span>Serviços <small>▾</small></span><span>Como funciona</span><span>Cases</span><span>Sobre</span></nav>
+                    <div class="mock-actions"><span class="icon-btn">EN</span><span class="btn btn-gray">Ver cases</span><span class="btn btn-light">Vamos conversar</span></div>
+                </div>
+            </LabFrame>
+        </div>
+    </div>
+</section>
+
+@* ---------------------------------------------------------------- Celular *@
+<section class="sec">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-tag">Celular</p>
+            <h2 class="title">No celular, <em>sobra pouco espaço.</em></h2>
+            <p class="body-text">Largura de 360px. O 4n com subtítulo não cabe legível aqui; nesses casos use o compacto ou o bloco.</p>
+        </div>
+
+        <div class="lab-phones">
+            @foreach (var m in phones)
+            {
+                <figure class="lab-phone">
+                    <div class="@m.Tone mock-phone-nav">
+                        <PraceLogo Variant="@m.Variant" Class="@m.Size" />
+                        <span class="mock-phone-icons"><span class="icon-btn">EN</span><span class="icon-btn">☰</span></span>
+                    </div>
+                    <div class="@m.Tone mock-phone-body">
+                        <p class="breadcrumb">Início / Modernização .NET</p>
+                        <p class="mock-phone-title">Modernize seu sistema .NET legado <em>sem parar a operação.</em></p>
+                    </div>
+                    <figcaption class="mono-label">@m.Name</figcaption>
+                </figure>
+            }
+        </div>
+    </div>
+</section>
+
+@* ---------------------------------------------------------------- Aplicações *@
+<section class="sec">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-tag">Aplicações</p>
+            <h2 class="title">Fora do site: <em>perfil e assinatura.</em></h2>
+        </div>
+
+        <div class="lab-apps">
+            <figure class="lab-app">
+                <div class="lab-avatars">
+                    <span class="lab-avatar lab-avatar-round"><PraceLogo Variant="stacked" /></span>
+                    <span class="lab-avatar"><PraceLogo Variant="stacked" /></span>
+                    <span class="lab-avatar lab-avatar-sm"><PraceLogo Variant="stacked" /></span>
+                </div>
+                <figcaption class="mono-label">Avatar · LinkedIn, GitHub, WhatsApp</figcaption>
+            </figure>
+
+            <figure class="lab-app">
+                <div class="tone-light lab-signature">
+                    <p>Obrigado, fico no aguardo.</p>
+                    <hr />
+                    <PraceLogo Variant="horizontal" Subtitle="TEO PRACE · MODERNIZAÇÃO DE LEGADO" Class="h-40" />
+                    <p class="mono-label">prace.dev · teo@prace.dev</p>
+                </div>
+                <figcaption class="mono-label">Assinatura de e-mail</figcaption>
+            </figure>
+
+            <figure class="lab-app">
+                <div class="tone-dark lab-cover">
+                    <PraceLogo Variant="horizontal" Class="h-56" />
+                    <p>Modernizo sistemas .NET legados <em>sem parar a operação.</em></p>
+                </div>
+                <figcaption class="mono-label">Capa do LinkedIn</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+@code {
+    private sealed record Palette(string Id, string Name, string Dark, string Light);
+    private sealed record LogoOption(string Id, string Name);
+    private sealed record SpecLogo(string Code, string Variant, string Name, string Use, string Size);
+    private sealed record Phone(string Name, string Variant, string Tone, string Size);
+
+    private static readonly Palette[] palettes =
+    [
+        new("verde", "Verde", "#4ADE80", "#1E7A44"),
+        new("marinho", "Marinho (spec)", "#7AA7FF", "#1E3A8A"),
+        new("latao", "Latão", "#E6BE6A", "#85570E"),
+        new("terracota", "Terracota", "#F2936A", "#A3401C"),
+        new("grafite", "Grafite", "#F2F2F2", "#0A0A0A"),
+    ];
+
+    private static readonly LogoOption[] logos =
+    [
+        new("compact", "4m/4n compacto"),
+        new("horizontal", "4m/4n completo"),
+        new("bridge", "12 · Ponte"),
+        new("syne", "8 · Syne"),
+        new("stacked", "11 · Bloco"),
+        new("dot", "Provisório (ponto)"),
+    ];
+
+    private static readonly SpecLogo[] specLogos =
+    [
+        new("4m / 4n", "horizontal", "Horizontal completo", "Header, assinatura, LinkedIn", "h-56"),
+        new("4m / 4n", "compact", "Horizontal compacto", "Header pequeno, celular (sem subtítulo)", "h-44"),
+        new("12", "bridge", "Ponte", "Wordmark; o arco é “modernizar sem parar”", "h-64"),
+        new("8", "syne", "Syne", "Wordmark minimalista", "h-48"),
+        new("11", "stacked", "Bloco empilhado", "Avatar, ícone quadrado", "h-80"),
+    ];
+
+    private static readonly Phone[] phones =
+    [
+        new("Compacto · escuro", "compact", "tone-dark", "h-26"),
+        new("Bloco · escuro", "stacked", "tone-dark", "h-40"),
+        new("Syne · claro", "syne", "tone-light", "h-26"),
+        new("Ponte · claro", "bridge", "tone-light", "h-34"),
+    ];
+
+    protected override void OnInitialized()
+    {
+        if (!Features.Value.BrandLab)
+            Nav.NotFound();
+    }
+}

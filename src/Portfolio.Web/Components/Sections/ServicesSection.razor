@@ -1,0 +1,26 @@
+<section class="sec">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-tag">@C.Home.ServicesTag</p>
+            <h2 class="title">@Rich.Render(C.Home.ServicesTitle)</h2>
+            <p class="body-text">@C.Home.ServicesText</p>
+        </div>
+        <div class="cell-grid">
+            @for (var i = 0; i < C.Services.Items.Count; i++)
+            {
+                var s = C.Services.Items[i];
+                <a class="cell cell-link" href="/@Lang/services#@s.Id">
+                    <span class="num">@((i + 1).ToString("00"))</span>
+                    <h3>@s.Title</h3>
+                    <p>@s.Summary</p>
+                    <span class="cell-more mono-label">→</span>
+                </a>
+            }
+        </div>
+    </div>
+</section>
+
+@code {
+    [Parameter, EditorRequired] public string Lang { get; set; } = "";
+    [Parameter, EditorRequired] public SiteContent C { get; set; } = default!;
+}

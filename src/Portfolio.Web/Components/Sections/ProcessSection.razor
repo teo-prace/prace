@@ -1,0 +1,27 @@
+@{
+    var process = C.Home.Process;
+}
+
+<section class="sec" id="process">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-tag">@process.Tag</p>
+            <h2 class="title">@Rich.Render(process.Title)</h2>
+        </div>
+        <ol class="cell-grid">
+            @for (var i = 0; i < process.Items.Count; i++)
+            {
+                var step = process.Items[i];
+                <li class="cell">
+                    <span class="num">@((i + 1).ToString("00"))</span>
+                    <h3>@step.Title</h3>
+                    <p>@step.Text</p>
+                </li>
+            }
+        </ol>
+    </div>
+</section>
+
+@code {
+    [Parameter, EditorRequired] public SiteContent C { get; set; } = default!;
+}

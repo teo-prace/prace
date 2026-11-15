@@ -1,0 +1,16 @@
+@page "/not-found"
+@layout MainLayout
+@inject IOptions<SiteOptions> Site
+
+<PageTitle>404 · @Site.Value.Brand</PageTitle>
+
+<section class="sec hero hero-page">
+    <div class="wrap">
+        <p class="breadcrumb">Error / 404</p>
+        <h1 class="display">Página não encontrada. <em>Page not found.</em></h1>
+        <div class="actions">
+            <a class="btn btn-light btn-lg" href="/pt">Voltar ao início</a>
+            <a class="btn btn-gray btn-lg" href="/en">Back to home</a>
+        </div>
+    </div>
+</section>

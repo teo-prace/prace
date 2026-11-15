@@ -1,0 +1,18 @@
+@if (C.Cases.Items.Count > 0)
+{
+    <section class="sec">
+        <div class="wrap split">
+            <div class="split-intro">
+                <p class="sec-tag">@C.Home.FeaturedCaseTag</p>
+                <h2 class="title">@Rich.Render(C.Home.FeaturedCaseTitle)</h2>
+                <a class="btn btn-ghost" href="/@Lang/cases">@C.Home.AllCases →</a>
+            </div>
+            <CaseCard Item="C.Cases.Items[0]" Labels="C.Cases.Labels" />
+        </div>
+    </section>
+}
+
+@code {
+    [Parameter, EditorRequired] public string Lang { get; set; } = "";
+    [Parameter, EditorRequired] public SiteContent C { get; set; } = default!;
+}

@@ -1,0 +1,144 @@
+@page "/{Lang}/contact"
+@using System.Net.Mail
+@using Microsoft.AspNetCore.Antiforgery
+@inherits LocalizedPage
+@*
+    Formulário público, sem login: proteção CSRF não se aplica aqui. Desligada para que o envio
+    não falhe quando o contêiner reinicia (scale-to-zero no Azure troca as chaves do antiforgery).
+*@
+@attribute [RequireAntiforgeryToken(required: false)]
+@inject IContactSender Sender
+@inject IOptions<SiteOptions> Site
+@inject ILogger<Contact> Logger
+
+<PageTitle>@C.Nav.Contact · @Brand</PageTitle>
+
+<PageHero Lang="@Lang" Home="@C.Nav.Home" Crumb="@C.Nav.Contact" Title="@C.Contact.Title" Lead="@C.Contact.Intro" />
+
+<section class="sec">
+    <div class="wrap contact">
+    <div>
+    @if (sent)
+    {
+        <p class="notice success" role="status">@C.Contact.Success</p>
+    }
+    else
+    {
+        @if (failed)
+        {
+            <p class="notice error" role="alert">@C.Contact.Failure</p>
+        }
+
+        <EditForm Model="Form" FormName="contact" OnSubmit="SubmitAsync" Enhance class="contact-form">
+            <label>
+                <span>@C.Contact.Name</span>
+                <InputText @bind-Value="Form!.Name" autocomplete="name" maxlength="120" />
+                @if (errors.TryGetValue("name", out var nameError))
+                {
+                    <span class="field-error">@nameError</span>
+                }
+            </label>
+
+            <label>
+                <span>@C.Contact.Email</span>
+                <InputText @bind-Value="Form!.Email" type="email" autocomplete="email" maxlength="200" />
+                @if (errors.TryGetValue("email", out var emailError))
+                {
+                    <span class="field-error">@emailError</span>
+                }
+            </label>
+
+            <label>
+                <span>@C.Contact.Message</span>
+                <InputTextArea @bind-Value="Form!.Message" rows="6" maxlength="4000" />
+                @if (errors.TryGetValue("message", out var messageError))
+                {
+                    <span class="field-error">@messageError</span>
+                }
+            </label>
+
+            @* Campo isca para robôs de spam: invisível para pessoas. *@
+            <div class="hp" aria-hidden="true">
+                <label>Website <InputText @bind-Value="Form!.Website" tabindex="-1" autocomplete="off" /></label>
+            </div>
+
+            <button type="submit" class="btn btn-solid btn-lg">@C.Contact.Send</button>
+        </EditForm>
+    }
+    </div>
+
+    <aside class="direct">
+        <span class="num">@C.Contact.DirectTitle</span>
+        <ul>
+            @if (!string.IsNullOrEmpty(Site.Value.Email))
+            {
+                <li><a href="mailto:@Site.Value.Email">@Site.Value.Email</a></li>
+            }
+            @if (!string.IsNullOrEmpty(Site.Value.LinkedInUrl))
+            {
+                <li><a href="@Site.Value.LinkedInUrl" rel="noopener" target="_blank">LinkedIn</a></li>
+            }
+            @if (!string.IsNullOrEmpty(Site.Value.WhatsApp))
+            {
+                <li><a href="https://wa.me/@Site.Value.WhatsApp" rel="noopener" target="_blank">WhatsApp</a></li>
+            }
+        </ul>
+    </aside>
+    </div>
+</section>
+
+@code {
+    [SupplyParameterFromForm]
+    private ContactForm? Form { get; set; }
+
+    private readonly Dictionary<string, string> errors = [];
+    private bool sent;
+    private bool failed;
+
+    protected override void OnInitialized() => Form ??= new();
+
+    private async Task SubmitAsync()
+    {
+        errors.Clear();
+        var form = Form!;
+
+        // Robô preencheu o campo isca: finge sucesso e descarta.
+        if (!string.IsNullOrEmpty(form.Website))
+        {
+            sent = true;
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(form.Name)) errors["name"] = C.Contact.Required;
+        if (string.IsNullOrWhiteSpace(form.Email)) errors["email"] = C.Contact.Required;
+        else if (!MailAddress.TryCreate(form.Email.Trim(), out _)) errors["email"] = C.Contact.InvalidEmail;
+        if (string.IsNullOrWhiteSpace(form.Message)) errors["message"] = C.Contact.Required;
+        if (errors.Count > 0) return;
+
+        try
+        {
+            await Sender.SendAsync(new ContactMessage(
+                Truncate(form.Name!, 120), Truncate(form.Email!, 200), Truncate(form.Message!, 4000), Lang));
+            sent = true;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Falha ao enviar mensagem de contato");
+            failed = true;
+        }
+    }
+
+    private static string Truncate(string value, int max)
+    {
+        var trimmed = value.Trim();
+        return trimmed.Length > max ? trimmed[..max] : trimmed;
+    }
+
+    private sealed class ContactForm
+    {
+        public string? Name { get; set; }
+        public string? Email { get; set; }
+        public string? Message { get; set; }
+        public string? Website { get; set; }
+    }
+}

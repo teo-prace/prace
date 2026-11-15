@@ -1,0 +1,249 @@
+{
+  // DRAFT: review every text. Keep it in sync with ../pt/site.json (a test checks this).
+  // *text* = serif italic (title highlight) · **text** = bold
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "process": "How it works",
+    "cases": "Case studies",
+    "articles": "Articles",
+    "about": "About",
+    "contact": "Contact",
+    "ctaSecondary": "Case studies",
+    "ctaPrimary": "Let's talk",
+    "switchLanguage": "PT",
+    "themeToggle": "Toggle light/dark theme",
+    "menu": "Menu"
+  },
+  "home": {
+    "title": "Prace · .NET legacy modernization",
+    "description": "Modernizing legacy .NET systems: VB6, WebForms and .NET Framework to modern .NET, in phases, without stopping your operation.",
+    "breadcrumb": "Home / .NET modernization",
+    "headline": "Modernize your legacy .NET system *without stopping your operation.*",
+    "lead": "I move systems built on **VB6**, **ASP.NET WebForms** and **.NET Framework** to **modern .NET**, in small phases, while the current system keeps running. Experience with **mission-critical financial systems**, from a bank's mobile app to a state government's budget system.",
+    "ctaPrimary": "Let's talk",
+    "ctaSecondary": "See how it works",
+    "audit": {
+      "title": "Legacy system · Assessment",
+      "counter": "6 risks",
+      "groups": [
+        {
+          "name": "Platform",
+          "rows": [
+            { "name": "VB6 and classic ASP", "detail": "Unsupported IDE", "value": "since 2008" },
+            { "name": "ASP.NET WebForms", "detail": "Not in modern .NET", "value": "No evolution" },
+            { "name": ".NET Framework 4.x", "detail": "Final version", "value": "Fixes only" }
+          ]
+        },
+        {
+          "name": "Operations",
+          "rows": [
+            { "name": "Manual deployment", "detail": "File copying", "value": "High risk" },
+            { "name": "No automated tests", "detail": "Manual checks", "value": "Fear of change" }
+          ]
+        },
+        {
+          "name": "Knowledge",
+          "rows": [
+            { "name": "Rules in code-behind", "detail": "Undocumented", "value": "Few people" }
+          ]
+        }
+      ],
+      "footer": [
+        "→ Modernize and fix all 6",
+        "Phased migration. The current system keeps running.",
+        "It starts with a system assessment."
+      ]
+    },
+    "changes": {
+      "tag": "What changes",
+      "title": "From *manual deployment* to an automated pipeline.",
+      "text": "It's not just a technology swap. The system becomes easier to maintain, ship and understand, and stops depending on the one or two people who know where to touch.",
+      "items": [
+        {
+          "from": "ASP.NET WebForms",
+          "to": "ASP.NET Core",
+          "text": "Pages migrated one by one, with business rules preserved and protected by tests."
+        },
+        {
+          "from": "Manual deployment",
+          "to": "automated pipeline",
+          "text": "Build, tests and release on every change. No more \"copy the folder to the server\"."
+        },
+        {
+          "from": "Hand-configured server",
+          "to": "container",
+          "text": "Application packaged with Docker, ready to run in the cloud or in your data center."
+        },
+        {
+          "from": "\"Only one person knows\"",
+          "to": "documented rules",
+          "text": "Business rules discovered, documented and covered by tests that capture current behavior."
+        }
+      ]
+    },
+    "servicesTag": "Services",
+    "servicesTitle": "How I can *help.*",
+    "servicesText": "I work as a remote contractor, on fixed-scope projects or embedded in your team.",
+    "process": {
+      "tag": "How it works",
+      "title": "Three steps, *no surprises.*",
+      "items": [
+        {
+          "title": "Assessment",
+          "text": "A review of the system, its dependencies, risks and business rules. You get a report with the plan."
+        },
+        {
+          "title": "Phased plan",
+          "text": "The migration is split into small parts, prioritized by risk and business value."
+        },
+        {
+          "title": "Migration while it runs",
+          "text": "Each part ships to production with tests, alongside the old system, until it can be switched off."
+        }
+      ]
+    },
+    "featuredCaseTag": "Featured case study",
+    "featuredCaseTitle": "From *MVP* to a product in production.",
+    "allCases": "See all case studies",
+    "latestArticlesTag": "Articles",
+    "latestArticlesTitle": "Latest *articles.*",
+    "closingTag": "Contact",
+    "closingTitle": "Got a system *nobody wants to touch?*",
+    "closingText": "Tell me about it. I'll reply with an initial analysis and possible next steps."
+  },
+  "services": {
+    "title": "Services for systems *that can't stop.*",
+    "intro": "I work as a remote contractor, on fixed-scope projects or embedded in your team.",
+    "items": [
+      {
+        "id": "modernizacao",
+        "title": "Legacy modernization",
+        "summary": "Migrating VB6, classic ASP, WebForms and .NET Framework applications to modern .NET, step by step, while the system keeps running.",
+        "bullets": [
+          "System assessment and incremental migration plan",
+          "Migration to ASP.NET Core and current .NET versions",
+          "Containerization with Docker",
+          "Tests that protect the business rules that already work"
+        ]
+      },
+      {
+        "id": "sustentacao",
+        "title": "Mission-critical system support",
+        "summary": "Maintaining and evolving complex systems with heavy business rules and no room for error.",
+        "bullets": [
+          "Fixes and improvements in legacy systems",
+          "Discovering and documenting business rules",
+          "New features without breaking what already works"
+        ]
+      },
+      {
+        "id": "produto",
+        "title": "Product development",
+        "summary": ".NET development in agile teams, from MVP to production.",
+        "bullets": [
+          "Back-end with C# and ASP.NET Core",
+          "Entity Framework and relational databases",
+          "Scrum, backlog refinement and stakeholder demos"
+        ]
+      }
+    ]
+  },
+  "cases": {
+    "title": "Work on *real systems.*",
+    "intro": "A few projects that show how I work.",
+    "labels": {
+      "context": "Context",
+      "challenge": "Challenge",
+      "solution": "What I did",
+      "result": "Outcome"
+    },
+    "items": [
+      {
+        "title": "Consortium product in Banrisul's mobile app",
+        "client": "Banrisul · Banking",
+        "context": "Banrisul, a Brazilian bank, did not offer consortium plans (a Brazilian group-purchase financing product) in its mobile app.",
+        "challenge": "Build a new digital product line from scratch in a banking environment, with high security and quality requirements.",
+        "solution": "I worked on it for 2 years, from MVP to product, in a Scrum team, presenting deliveries to stakeholders.",
+        "result": "The feature shipped, became a product and is still in production.",
+        "tags": [ "MVP", "Scrum", "Banking" ]
+      },
+      {
+        "title": "State budget execution system",
+        "client": "Public sector · Public finance",
+        "context": "A Brazilian state's public finance system, responsible for executing expenditures within the approved budget.",
+        "challenge": "A large, mission-critical system built over many years across several technologies, with complex business rules.",
+        "solution": "I maintain and evolve the system, working with VB6, VB.NET, C#, .NET Framework and ASP.NET WebForms.",
+        "result": "Continuity of an essential public management process.",
+        "tags": [ "VB6", "VB.NET", "C#", ".NET Framework", "WebForms" ]
+      },
+      {
+        "title": "Maps for the construction industry",
+        "client": "Constru Marketing · Construction",
+        "context": "A marketing company focused on the construction industry.",
+        "challenge": "Provide an interactive maps feature inside the company's application.",
+        "solution": "I built the maps feature with AngularJS on the front end and .NET Core with Entity Framework Migrations on the back end.",
+        "result": "Maps feature integrated into the application.",
+        "tags": [ ".NET Core", "Entity Framework", "AngularJS" ]
+      }
+    ]
+  },
+  "testimonials": {
+    "tag": "Testimonials",
+    "title": "What *clients say.*",
+    "items": []
+  },
+  "about": {
+    "title": "Prace is *Teo's work.*",
+    "lead": "*Práce* means \"work\" in Czech. It's what I do for systems nobody else wants to touch.",
+    "paragraphs": [
+      "I'm a .NET developer who works on systems that need to run every single day: in banking, I worked on Banrisul's consortium feature from MVP to product; in the public sector, I maintain a state budget execution system.",
+      "This path gave me experience on both ends of .NET: from VB6, classic ASP and WebForms to .NET Core and Entity Framework. That's exactly what a modernization project needs.",
+      "I like to understand the business rules before the code, and to explain technical decisions in plain language to the people who make the calls."
+    ],
+    "stackTag": "Technologies",
+    "stackTitle": "From *VB6* to modern .NET.",
+    "stack": [
+      {
+        "name": "Professional experience",
+        "items": [ "C#", ".NET Core", ".NET Framework", "VB.NET", "VB6", "ASP.NET WebForms", "Classic ASP", "Entity Framework", "AngularJS", "HTML & CSS", "Scrum" ]
+      },
+      {
+        "name": "Study and personal projects",
+        "items": [ "Docker", "Kubernetes", "Modern ASP.NET Core", "Blazor" ]
+      }
+    ],
+    "howTag": "How I work",
+    "howTitle": "Principles.",
+    "how": [
+      "Small, frequent deliveries with clear progress tracking",
+      "Direct communication with the business, not just the tech team",
+      "Safe change: protect what already works before modernizing",
+      "Remote, as a contractor"
+    ]
+  },
+  "contact": {
+    "title": "Let's *talk.*",
+    "intro": "Tell me a bit about your system or project. I reply within 1 business day.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send message",
+    "success": "Message sent. Thank you! I'll get back to you soon.",
+    "failure": "Couldn't send right now. Please try again or use one of the contacts on the side.",
+    "required": "Required field.",
+    "invalidEmail": "Invalid email.",
+    "directTitle": "Or reach out directly"
+  },
+  "articles": {
+    "title": "Articles",
+    "intro": "What I learn maintaining and modernizing .NET systems.",
+    "empty": "Coming soon.",
+    "readMore": "Read article",
+    "backToList": "All articles",
+    "draft": "Draft"
+  },
+  "footer": {
+    "tagline": "I modernize legacy .NET systems without stopping operations."
+  }
+}

@@ -1,0 +1,16 @@
+@* Moldura de um exemplo em /brand: número, título, nota e o modelo. *@
+<figure class="lab-frame">
+    <figcaption>
+        <span class="mono-label">Nº @N</span>
+        <strong>@Title</strong>
+        <span>@Note</span>
+    </figcaption>
+    <div class="lab-frame-body">@ChildContent</div>
+</figure>
+
+@code {
+    [Parameter] public string N { get; set; } = "";
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string Note { get; set; } = "";
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}

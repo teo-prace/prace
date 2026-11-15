@@ -1,0 +1,56 @@
+@page "/{Lang}/about"
+@inherits LocalizedPage
+
+<PageTitle>@C.Nav.About · @Brand</PageTitle>
+
+<PageHero Lang="@Lang" Home="@C.Nav.Home" Crumb="@C.Nav.About" Title="@C.About.Title" Lead="@C.About.Lead" />
+
+<section class="sec">
+    <div class="wrap prose">
+        @foreach (var paragraph in C.About.Paragraphs)
+        {
+            <p>@Rich.Render(paragraph)</p>
+        }
+    </div>
+</section>
+
+<section class="sec">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-tag">@C.About.StackTag</p>
+            <h2 class="title">@Rich.Render(C.About.StackTitle)</h2>
+        </div>
+        <div class="cell-grid cols-2">
+            @foreach (var group in C.About.Stack)
+            {
+                <div class="cell">
+                    <span class="num">@group.Name</span>
+                    <ul class="chips">
+                        @foreach (var item in group.Items)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="sec">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-tag">@C.About.HowTag</p>
+            <h2 class="title">@Rich.Render(C.About.HowTitle)</h2>
+        </div>
+        <ol class="stack-list stack-wide">
+            @for (var i = 0; i < C.About.How.Count; i++)
+            {
+                <li class="stack-card compact">
+                    <span class="num">@((i + 1).ToString("00"))</span>
+                    <h3>@C.About.How[i]</h3>
+                </li>
+            }
+        </ol>
+    </div>
+</section>

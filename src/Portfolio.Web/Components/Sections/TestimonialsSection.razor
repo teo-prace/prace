@@ -1,0 +1,26 @@
+@* Só aparece quando houver depoimentos em site.json → testimonials.items. *@
+@if (C.Testimonials.Items.Count > 0)
+{
+    <section class="sec">
+        <div class="wrap">
+            <div class="sec-head">
+                <p class="sec-tag">@C.Testimonials.Tag</p>
+                <h2 class="title">@Rich.Render(C.Testimonials.Title)</h2>
+            </div>
+            <div class="cell-grid">
+                @foreach (var t in C.Testimonials.Items)
+                {
+                    <figure class="cell quote">
+                        <span class="quote-mark" aria-hidden="true">“</span>
+                        <blockquote>@t.Quote</blockquote>
+                        <figcaption class="mono-label">@t.Author · @t.Role</figcaption>
+                    </figure>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@code {
+    [Parameter, EditorRequired] public SiteContent C { get; set; } = default!;
+}

@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="@ContentService.HtmlLang(lang)" data-theme="dark" data-logo="@Site.Value.Logo" data-palette="@Site.Value.Palette" data-default-logo="@Site.Value.Logo" data-default-palette="@Site.Value.Palette">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B0F12" />
+    <BasePath />
+    @* Aplica tema, paleta e logo salvos antes de pintar a página (evita "piscar" ao carregar).
+       Paleta e logo só ficam salvos quando escolhidos em /brand (fase de testes). *@
+    <script>
+        (function () { try { var d = document.documentElement; ["theme", "palette", "logo"].forEach(function (k) { var v = localStorage.getItem(k); if (v) d.setAttribute("data-" + k, v); }); } catch (e) { } })();
+    </script>
+    <ResourcePreloader />
+    @foreach (var alt in ContentService.Languages)
+    {
+        <link rel="alternate" hreflang="@ContentService.HtmlLang(alt)" href="@($"{baseUrl}{ContentService.SwitchLanguagePath(path, alt)}")" />
+    }
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500;700&family=Unbounded:wght@800&family=Sora:wght@700&family=Syne:wght@800&family=Bricolage+Grotesque:wght@400;800&display=swap" />
+    <link rel="stylesheet" href="@Assets["app.css"]" />
+    <link rel="stylesheet" href="@Assets["Portfolio.Web.styles.css"]" />
+    <ImportMap />
+    <HeadOutlet />
+</head>
+
+<body>
+    <Routes />
+    <script src="@Assets["_framework/blazor.web.js"]"></script>
+    <script src="@Assets["js/site.js"]"></script>
+</body>
+
+</html>
+
+@code {
+    [Inject] private IOptions<SiteOptions> Site { get; set; } = default!;
+
+    [CascadingParameter]
+    private HttpContext? HttpContext { get; set; }
+
+    private string path = "/";
+    private string lang = ContentService.DefaultLanguage;
+    private string baseUrl = "";
+
+    protected override void OnInitialized()
+    {
+        path = HttpContext?.Request.Path.Value ?? "/";
+        lang = ContentService.LanguageFromPath(path);
+        if (HttpContext is not null)
+            baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+    }
+}

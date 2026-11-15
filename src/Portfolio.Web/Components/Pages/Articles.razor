@@ -1,0 +1,41 @@
+@page "/{Lang}/articles"
+@inherits LocalizedPage
+@inject ArticleService ArticleService
+@inject IOptions<FeatureOptions> Features
+
+<PageTitle>@C.Articles.Title · @Brand</PageTitle>
+
+<PageHero Lang="@Lang" Home="@C.Nav.Home" Crumb="@C.Nav.Articles" Title="@C.Articles.Title" Lead="@C.Articles.Intro" />
+
+<section class="sec">
+    <div class="wrap">
+        @if (items.Count == 0)
+        {
+            <p class="body-text">@C.Articles.Empty</p>
+        }
+        else
+        {
+            <div class="cell-grid">
+                @foreach (var article in items)
+                {
+                    <ArticleCard Lang="@Lang" Article="article" C="C" />
+                }
+            </div>
+        }
+    </div>
+</section>
+
+@code {
+    private IReadOnlyList<Article> items = [];
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (!Features.Value.Articles)
+        {
+            Nav.NotFound();
+            return;
+        }
+        items = ArticleService.List(Lang);
+    }
+}

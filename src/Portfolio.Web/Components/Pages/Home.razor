@@ -1,0 +1,22 @@
+﻿@page "/{Lang:nonfile}"
+@inherits LocalizedPage
+
+@*
+    A Home é montada por seções (Components/Sections). As seções alternam
+    automaticamente entre escuro e claro, e a numeração "01 / ..." é automática (CSS).
+    Para adicionar algo novo, crie uma seção e inclua aqui.
+*@
+
+<PageTitle>@C.Home.Title</PageTitle>
+<HeadContent>
+    <meta name="description" content="@C.Home.Description" />
+</HeadContent>
+
+<HeroSection Lang="@Lang" C="C" />
+<ChangesSection C="C" />
+<ServicesSection Lang="@Lang" C="C" />
+<ProcessSection C="C" />
+<FeaturedCaseSection Lang="@Lang" C="C" />
+<TestimonialsSection C="C" />
+<LatestArticlesSection Lang="@Lang" C="C" />
+<ClosingSection Lang="@Lang" C="C" />

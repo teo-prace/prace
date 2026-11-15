@@ -1,0 +1,35 @@
+@page "/{Lang}/services"
+@inherits LocalizedPage
+
+<PageTitle>@C.Nav.Services · @Brand</PageTitle>
+
+<PageHero Lang="@Lang" Home="@C.Nav.Home" Crumb="@C.Nav.Services" Title="@C.Services.Title" Lead="@C.Services.Intro" />
+
+<section class="sec">
+    <div class="wrap">
+        <ol class="stack-list stack-wide">
+            @for (var i = 0; i < C.Services.Items.Count; i++)
+            {
+                var s = C.Services.Items[i];
+                <li class="stack-card service" id="@s.Id">
+                    <span class="num">@((i + 1).ToString("00"))</span>
+                    <div class="service-body">
+                        <div>
+                            <h3>@s.Title</h3>
+                            <p>@s.Summary</p>
+                        </div>
+                        <ul class="ticks">
+                            @foreach (var b in s.Bullets)
+                            {
+                                <li>@b</li>
+                            }
+                        </ul>
+                    </div>
+                </li>
+            }
+        </ol>
+    </div>
+</section>
+
+<ProcessSection C="C" />
+<ClosingSection Lang="@Lang" C="C" />

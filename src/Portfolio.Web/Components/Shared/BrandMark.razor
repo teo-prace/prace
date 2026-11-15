@@ -1,0 +1,17 @@
+@*
+    Logo do header/rodapé. Renderiza todas as variantes e o CSS mostra só a ativa
+    (atributo data-logo no <html>, vindo de Site:Logo ou da escolha feita em /brand).
+    Quando o logo for definido de vez, dá para trocar isto por um único <PraceLogo Variant="..." />.
+*@
+
+<a class="logo brand-mark @Class" href="/@Lang" aria-label="@(Lang == "pt" ? "Prace — início" : "Prace — home")">
+    @foreach (var v in PraceLogo.Variants)
+    {
+        <PraceLogo Variant="@v" Subtitle="@(Lang == "pt" ? "TEO PRACE · MODERNIZAÇÃO DE LEGADO" : "TEO PRACE · LEGACY MODERNIZATION")" />
+    }
+</a>
+
+@code {
+    [Parameter] public string Lang { get; set; } = "pt";
+    [Parameter] public string? Class { get; set; }
+}

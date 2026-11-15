@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net11.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="1.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Artigos em Markdown vão junto na publicação (e na imagem Docker). -->
+    <Content Include="Content\**\*.md" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
