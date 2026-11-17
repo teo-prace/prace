@@ -1,4 +1,5 @@
 using System.Text;
+using System.Threading.RateLimiting;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using Portfolio.Web;
@@ -24,6 +25,44 @@ if (email.IsConfigured)
 else
     builder.Services.AddSingleton<IContactSender, LoggingContactSender>();
 
+// Limite de requisições por IP
+// Com no máximo 1 instância no Azure
+// appsettings.json (RateLimit).
+var limits = builder.Configuration.GetSection("RateLimit").Get<RateLimitOptions>() ?? new();
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    // Corpo próprio para o 429
+    options.OnRejected = (context, ct) =>
+        new ValueTask(context.HttpContext.Response.WriteAsync("Too many requests. Try again in a few minutes.", ct));
+
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(ctx =>
+    {
+        // Sondas de saúde do Azure ficam fora do limite.
+        if (ctx.Request.Path.StartsWithSegments("/healthz"))
+            return RateLimitPartition.GetNoLimiter("healthz");
+
+        // Atrás do ingress do Azure, o IP real vem do X-Forwarded-For (ASPNETCORE_FORWARDEDHEADERS_ENABLED).
+        // Quando a Cloudflare estiver na frente (proxy), trocar para o cabeçalho CF-Connecting-IP.
+        var ip = ctx.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+        var isContactPost = HttpMethods.IsPost(ctx.Request.Method)
+            && ctx.Request.Path.Value?.EndsWith("/contact", StringComparison.OrdinalIgnoreCase) == true;
+
+        return isContactPost
+            ? RateLimitPartition.GetFixedWindowLimiter("contact:" + ip, _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = limits.ContactPerWindow,
+                Window = TimeSpan.FromMinutes(limits.ContactWindowMinutes),
+            })
+            : RateLimitPartition.GetFixedWindowLimiter("all:" + ip, _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = limits.RequestsPerMinute,
+                Window = TimeSpan.FromMinutes(1),
+            });
+    });
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -33,6 +72,7 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
 app.UseHttpsRedirection();
+app.UseRateLimiter();
 app.UseAntiforgery();
 
 app.MapStaticAssets();

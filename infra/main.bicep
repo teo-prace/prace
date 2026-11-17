@@ -25,6 +25,9 @@ param emailTo string = ''
 @maxValue(1)
 param minReplicas int = 1
 
+@description('Teto diário de logs em GB. Acima disso o Azure para de gravar logs até o dia seguinte (protege a fatura).')
+param logsDailyQuotaGb string = '0.2'
+
 var emailEnabled = !empty(resendApiKey) && !empty(emailFrom) && !empty(emailTo)
 
 resource logs 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
@@ -33,6 +36,10 @@ resource logs 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
   properties: {
     sku: { name: 'PerGB2018' }
     retentionInDays: 30
+    // passou do teto, para de gravar no dia.
+    workspaceCapping: {
+      dailyQuotaGb: json(logsDailyQuotaGb)
+    }
   }
 }
 
