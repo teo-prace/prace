@@ -259,7 +259,7 @@ h1:focus { outline: none; }
     color: var(--body);
 }
 
-.lead strong, .body-text strong, .prose strong { color: var(--strong); font-weight: 600; }
+.lead strong, .body-text strong, .prose strong, .case-rows dd strong { color: var(--strong); font-weight: 600; }
 
 .body-text {
     margin: 0;

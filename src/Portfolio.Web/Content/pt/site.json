@@ -21,7 +21,7 @@
     "description": "Modernização de sistemas legados Microsoft: VB6, ASP clássico, WebForms e .NET Framework para o .NET moderno, em fases e sem parar a operação.",
     "breadcrumb": "Início / Modernização de legado",
     "headline": "Modernize seu sistema legado *sem parar a operação.*",
-    "lead": "Levo sistemas em **VB6**, **ASP clássico**, **WebForms** e **.NET Framework** para o **.NET moderno**, em fases pequenas, enquanto o sistema atual continua rodando. Já fiz isso em **finanças públicas**, num sistema que executa o orçamento de um estado, e construí **produto bancário** do MVP à produção.",
+    "lead": "Levo sistemas em **VB6**, **ASP clássico**, **WebForms** e **.NET Framework** para o .NET moderno, em fases pequenas, enquanto o sistema atual continua rodando. Já fiz isso em **finanças públicas**, num sistema que executa o orçamento de um estado brasileiro, e construí produto bancário do MVP à produção.",
     "ctaPrimary": "Vamos conversar",
     "ctaSecondary": "Ver como funciona",
     "audit": {
@@ -114,7 +114,7 @@
     "closingText": "Conte o cenário. Eu respondo com uma análise inicial e os próximos passos possíveis."
   },
   "services": {
-    "title": "Serviços para sistemas *que não podem parar.*",
+    "title": "Serviços para *sistemas críticos.*",
     "intro": "Atuo como PJ, remoto, em projeto fechado ou alocado no seu time.",
     "items": [
       {
@@ -136,7 +136,8 @@
         "bullets": [
           "Correções e melhorias em sistemas legados",
           "Levantamento e documentação de regras de negócio",
-          "Novas funcionalidades sem quebrar o que já existe"
+          "Novas funcionalidades sem quebrar o que já existe",
+          "Monitoramento em produção e gestão de incidentes"
         ]
       },
       {
@@ -144,7 +145,7 @@
         "title": "Desenvolvimento de produto",
         "summary": "Desenvolvimento .NET em time ágil, do MVP ao produto em produção.",
         "bullets": [
-          "Back-end em C# e ASP.NET Core",
+          "Back-end em C# e ASP.NET Core, front-end em Angular",
           "Entity Framework e bancos de dados relacionais",
           "Scrum, refinamento e apresentação de entregas para stakeholders"
         ]
@@ -167,7 +168,7 @@
         "context": "Sistema estratégico, em operação há décadas, responsável pela execução orçamentária de um estado. É mantido por dezenas de profissionais, segue regras contábeis definidas em lei e tem suas entregas testadas e auditadas pelo Estado.",
         "challenge": "Levar módulos críticos de VB6, ASP e SQL Server para .NET 10 e Angular sem interromper a execução orçamentária e sem nenhuma divergência nos valores contábeis.",
         "solution": "Atuei como revisor e arquiteto na migração dos módulos de empenho e liquidação, com as novas telas integradas ao sistema legado e os dois operando em paralelo durante a transição. Fiz a ponte entre as equipes do legado e do .NET moderno na definição dos componentes compartilhados. Na equipe de arquitetura, trabalhei com pipelines de CI/CD, Docker, Kubernetes, monitoramento de produção e gestão de incidentes.",
-        "result": "Migração incremental, sem parada e com zero divergência contábil, homologada pela auditoria do Estado. Na operação, um mapeamento documentado de responsáveis tornou o encaminhamento de incidentes mais rápido.",
+        "result": "Migração incremental, **sem parada e com zero divergência contábil**, homologada pela auditoria do Estado. Na operação, um mapeamento documentado de responsáveis tornou o encaminhamento de incidentes mais rápido.",
         "tags": [ "VB6", "ASP", "SQL Server", ".NET 10", "Angular", "CI/CD", "Docker", "Kubernetes" ]
       },
       {
@@ -176,7 +177,7 @@
         "context": "Atuei na área de BIM (Building Information Modeling) da Construmarket, empresa de tecnologia para a construção civil focada na digitalização de obras.",
         "challenge": "Dar confiabilidade às inspeções de campo, confirmando com dados de localização que cada vistoria acontecia de fato na obra, e reestruturar um banco de dados que concentrava informação demais em poucas tabelas.",
         "solution": "Contribuí no desenvolvimento da aplicação como um todo, com AngularJS no front-end e .NET Core no back-end. Auxiliei na marcação georreferenciada das inspeções no Google Maps, a partir do GPS dos dispositivos móveis usados em campo, e participei da normalização do banco de dados, com as mudanças versionadas por Entity Framework Migrations.",
-        "result": "Inspeções registradas com localização e visíveis no mapa, permitindo verificar se cada vistoria foi feita no local, e um banco de dados mais consistente e fácil de evoluir.",
+        "result": "Inspeções registradas com localização e visíveis no mapa, permitindo **verificar se cada vistoria foi feita no local**, e um banco de dados mais consistente e fácil de evoluir.",
         "tags": [ ".NET Core", "AngularJS", "Entity Framework", "Google Maps", "GPS", "BIM" ]
       },
       {
@@ -185,7 +186,7 @@
         "context": "O aplicativo do Banrisul ainda não oferecia consórcio, e o produto precisava chegar ao canal digital do banco.",
         "challenge": "Criar do zero uma nova linha de produto digital em ambiente bancário, com exigências altas de segurança, qualidade e conformidade.",
         "solution": "Participei do desenvolvimento por 2 anos, do MVP ao produto, em time Scrum: refinamento com o negócio, entregas incrementais e apresentações periódicas para os stakeholders.",
-        "result": "A funcionalidade foi lançada, tornou-se um produto do banco e segue em produção.",
+        "result": "A funcionalidade foi lançada, tornou-se um produto do banco e **segue em produção**.",
         "tags": [ "MVP", "Scrum", "Produto digital", "Setor bancário" ]
       }
     ]
@@ -201,10 +202,9 @@
     "lead": "Analista de computação, especialista em tecnologias Microsoft: do **VB6** ao **.NET 10**.",
     "portraitAlt": "Retrato ilustrado do Teo, de blazer azul-marinho e camiseta branca",
     "paragraphs": [
-      "Sou Mateus Prado Ceccagno, **desenvolvedor** **.NET** com experiência em sistemas críticos, em que disponibilidade e precisão são requisitos do negócio. No setor público, atuo num sistema de finanças públicas que executa o orçamento de um estado brasileiro, com regras contábeis definidas em lei e entregas auditadas pelo Estado. No setor bancário, construí do **MVP** ao produto a funcionalidade de consórcio do app do Banrisul. Na construção civil, trabalhei com geolocalização por GPS, integrações com o Google Maps e normalização de dados.",
-      "No sistema de finanças públicas, comecei pela manutenção do legado (VB6, VB.NET, ASP, ASP.NET e SQL Server), o que me deu domínio profundo das regras de negócio. Com o tempo, passei a atuar também com pipelines de CI/CD, monitoramento em produção, Docker e Kubernetes, e como revisor e arquiteto na migração de módulos críticos para .NET 10 e Angular, sem interromper o sistema e com zero divergência contábil.",
-      "Meu papel mais frequente é o de **ponte**: transito entre quem conhece o legado e quem trabalha com o .NET moderno, e ajudo a decidir o que precisa ser preservado e o que pode mudar.",
-      "Também sou vice-líder técnico de uma equipe de seis pessoas e ajudei a padronizar as práticas de FinOps no meu setor.",
+      "Sou Mateus Prado Ceccagno, **desenvolvedor .NET** com experiência em sistemas críticos, em que disponibilidade e precisão são requisitos do negócio. No setor público, atuo num sistema de finanças públicas que executa o orçamento de um estado brasileiro, com regras contábeis definidas em lei e entregas auditadas pelo Estado. Na construção civil, trabalhei com geolocalização por GPS, integrações com o Google Maps e normalização de dados. No setor bancário, construí do MVP ao produto a funcionalidade de consórcio do app do **Banrisul**.",
+      "No sistema de finanças públicas, comecei pela manutenção do legado (VB6, VB.NET, ASP, ASP.NET e SQL Server), o que me deu domínio profundo das regras de negócio. Com o tempo, passei a atuar também com pipelines de CI/CD, monitoramento em produção, Docker e Kubernetes, e como **revisor e arquiteto na migração** de módulos críticos para .NET 10 e Angular, **sem interromper o sistema e com zero divergência contábil**.",
+      "Meu papel mais frequente é o de **ponte**: transito entre quem conhece o legado e quem trabalha com o .NET moderno, e ajudo a decidir o que precisa ser preservado e o que pode mudar. Ao longo da carreira, também ensinei e apoiei colegas e participei de grupos de trabalho de FinOps.",
       "Priorizo entender a regra de negócio antes de escrever código e traduzo decisões técnicas em linguagem clara para quem decide.",
       "*Prace* vem do meu sobrenome, **Pra**do **Ce**ccagno, e *Teo*, de Mateus."
     ],

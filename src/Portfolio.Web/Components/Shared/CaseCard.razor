@@ -4,10 +4,11 @@
         <h3>@Item.Title</h3>
     </header>
     <dl class="case-rows">
-        <div><dt>@Labels.Context</dt><dd>@Item.Context</dd></div>
-        <div><dt>@Labels.Challenge</dt><dd>@Item.Challenge</dd></div>
-        <div><dt>@Labels.Solution</dt><dd>@Item.Solution</dd></div>
-        <div><dt>@Labels.Result</dt><dd>@Item.Result</dd></div>
+        @* Aceitam **negrito** (Rich): use só no que o cliente procura ao passar os olhos. *@
+        <div><dt>@Labels.Context</dt><dd>@Rich.Render(Item.Context)</dd></div>
+        <div><dt>@Labels.Challenge</dt><dd>@Rich.Render(Item.Challenge)</dd></div>
+        <div><dt>@Labels.Solution</dt><dd>@Rich.Render(Item.Solution)</dd></div>
+        <div><dt>@Labels.Result</dt><dd>@Rich.Render(Item.Result)</dd></div>
     </dl>
     @if (Item.Tags.Count > 0)
     {
