@@ -58,16 +58,21 @@ $tenant = az account show --query tenantId -o tsv
 $rg = az group show -n rg-portfolio --query id -o tsv
 
 # Identidade do pipeline
-$appId = az ad app create --display-name gh-portfolio-deploy --query appId -o tsv
+$appId = az ad app create --display-name gh-prace-deploy --query appId -o tsv
 az ad sp create --id $appId
+Start-Sleep -Seconds 30
 az role assignment create --assignee $appId --role Contributor --scope $rg
 
-# Confiança no GitHub (troque <usuario>/<repo>)
+# Confiança no GitHub. O subject precisa ser EXATAMENTE o que o GitHub envia.
+# Repositórios novos usam o formato com IDs numéricos: repo:<usuario>@<id-usuario>/<repo>@<id-repo>:environment:production
+# (os IDs aparecem na mensagem de erro AADSTS700213 do primeiro deploy, ou em
+#  https://api.github.com/users/<usuario> e https://api.github.com/repos/<usuario>/<repo>, campo "id").
+# Neste projeto: repo:teo-prace@355556173/prace@1459210037:environment:production
 @'
 {
-  "name": "github-production",
+  "name": "github-production-ids",
   "issuer": "https://token.actions.githubusercontent.com",
-  "subject": "repo:<usuario>/<repo>:environment:production",
+  "subject": "repo:teo-prace@355556173/prace@1459210037:environment:production",
   "audiences": ["api://AzureADTokenExchange"]
 }
 '@ | Out-File -Encoding utf8 fed.json
