@@ -25,6 +25,8 @@
     }
 
     function applyBrand() {
+        // Escolhas de paleta/logo são da fase de testes (/brand); em produção vale o appsettings.
+        if (!root.hasAttribute("data-brand-lab")) return;
         ["palette", "logo"].forEach(function (key) {
             var value = saved(key) || defaults[key];
             if (value) root.setAttribute("data-" + key, value);

@@ -85,7 +85,7 @@
             <div>
                 @* Rodapé: sempre o horizontal completo (4m/4n), com o subtítulo no idioma da página. *@
                 <a class="footer-logo" href="/@lang" aria-label="@(lang == "pt" ? "Prace — início" : "Prace — home")">
-                    <PraceLogo Variant="horizontal" Subtitle="@(lang == "pt" ? "TEO PRACE · MODERNIZAÇÃO DE LEGADO" : "TEO PRACE · LEGACY MODERNIZATION")" />
+                    <PraceLogo Variant="horizontal" Subtitle="@(lang == "pt" ? "MODERNIZAÇÃO DE LEGADO" : "LEGACY MODERNIZATION")" />
                 </a>
                 <p class="footer-tagline">@c.Footer.Tagline</p>
             </div>
@@ -94,6 +94,10 @@
                 <a href="/@lang/cases">@c.Nav.Cases</a>
                 <a href="/@lang/about">@c.Nav.About</a>
                 <a href="/@lang/contact">@c.Nav.Contact</a>
+                @if (!string.IsNullOrEmpty(Site.Value.Email))
+                {
+                    <a href="mailto:@Site.Value.Email">@Site.Value.Email</a>
+                }
                 @if (!string.IsNullOrEmpty(Site.Value.LinkedInUrl))
                 {
                     <a href="@Site.Value.LinkedInUrl" rel="noopener" target="_blank">LinkedIn</a>
@@ -103,7 +107,10 @@
                     <a href="@Site.Value.GitHubUrl" rel="noopener" target="_blank">GitHub</a>
                 }
             </nav>
-            <p class="mono-label footer-copy">© @DateTime.UtcNow.Year @Site.Value.Brand</p>
+            <p class="mono-label footer-copy">
+                <span>© @DateTime.UtcNow.Year @Site.Value.Brand · @Site.Value.Owner · @c.Footer.Location</span>
+                <a href="/@lang/privacy">@c.Nav.Privacy</a>
+            </p>
         </div>
     </footer>
 </div>

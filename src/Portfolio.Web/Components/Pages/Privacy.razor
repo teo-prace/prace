@@ -1,0 +1,23 @@
+@page "/{Lang}/privacy"
+@inherits LocalizedPage
+
+<PageTitle>@C.Nav.Privacy · @Brand</PageTitle>
+
+<PageHero Lang="@Lang" Home="@C.Nav.Home" Crumb="@C.Nav.Privacy" Title="@C.Privacy.Title" Lead="@C.Privacy.Lead" />
+
+<section class="sec">
+    <div class="wrap">
+        <ol class="stack-list stack-wide">
+            @for (var i = 0; i < C.Privacy.Sections.Count; i++)
+            {
+                var s = C.Privacy.Sections[i];
+                <li class="stack-card">
+                    <span class="num">@((i + 1).ToString("00"))</span>
+                    <h3>@s.Title</h3>
+                    <p>@s.Text</p>
+                </li>
+            }
+        </ol>
+        <p class="mono-label privacy-updated">@C.Privacy.Updated</p>
+    </div>
+</section>

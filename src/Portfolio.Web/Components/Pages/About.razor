@@ -3,7 +3,9 @@
 
 <PageTitle>@C.Nav.About · @Brand</PageTitle>
 
-<PageHero Lang="@Lang" Home="@C.Nav.Home" Crumb="@C.Nav.About" Title="@C.About.Title" Lead="@C.About.Lead" />
+<PageHero Lang="@Lang" Home="@C.Nav.Home" Crumb="@C.Nav.About" Title="@C.About.Title" Lead="@C.About.Lead">
+    <Aside><Portrait Alt="@C.About.PortraitAlt" Eager="true" /></Aside>
+</PageHero>
 
 <section class="sec">
     <div class="wrap prose">
@@ -20,7 +22,7 @@
             <p class="sec-tag">@C.About.StackTag</p>
             <h2 class="title">@Rich.Render(C.About.StackTitle)</h2>
         </div>
-        <div class="cell-grid cols-2">
+        <div class="cell-grid">
             @foreach (var group in C.About.Stack)
             {
                 <div class="cell">

@@ -19,6 +19,8 @@ public class RouteTests(WebApplicationFactory<Program> factory) : IClassFixture<
     [InlineData("/en/about")]
     [InlineData("/pt/contact")]
     [InlineData("/en/contact")]
+    [InlineData("/pt/privacy")]
+    [InlineData("/en/privacy")]
     [InlineData("/pt/articles")]
     [InlineData("/en/articles")]
     [InlineData("/healthz")]

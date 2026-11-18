@@ -12,6 +12,7 @@ public sealed class SiteContent
     public AboutContent About { get; init; } = new();
     public ContactContent Contact { get; init; } = new();
     public ArticlesContent Articles { get; init; } = new();
+    public PrivacyContent Privacy { get; init; } = new();
     public FooterContent Footer { get; init; } = new();
 }
 
@@ -24,6 +25,7 @@ public sealed class NavContent
     public string Articles { get; init; } = "";
     public string About { get; init; } = "";
     public string Contact { get; init; } = "";
+    public string Privacy { get; init; } = "";
     public string CtaSecondary { get; init; } = "";
     public string CtaPrimary { get; init; } = "";
     public string SwitchLanguage { get; init; } = "";
@@ -114,7 +116,7 @@ public sealed class ServicesContent
 
 public sealed class ServiceItem
 {
-    // Âncora na página de serviços (/pt/services#id). Use o mesmo id em todos os idiomas.
+    // Âncora na página de serviços (/pt/services#id). Cada idioma usa um id no próprio idioma.
     public string Id { get; init; } = "";
     public string Title { get; init; } = "";
     public string Summary { get; init; } = "";
@@ -167,6 +169,8 @@ public sealed class AboutContent
 {
     public string Title { get; init; } = "";
     public string Lead { get; init; } = "";
+    // Texto alternativo do retrato (leitores de tela).
+    public string PortraitAlt { get; init; } = "";
     public List<string> Paragraphs { get; init; } = [];
     public string StackTag { get; init; } = "";
     public string StackTitle { get; init; } = "";
@@ -195,6 +199,23 @@ public sealed class ContactContent
     public string Required { get; init; } = "";
     public string InvalidEmail { get; init; } = "";
     public string DirectTitle { get; init; } = "";
+    // Frase abaixo do botão; o link para a política de privacidade vem logo depois (Nav.Privacy).
+    public string PrivacyNote { get; init; } = "";
+}
+
+// Política de privacidade (LGPD). Revise ao mudar o que o site coleta ou os serviços usados.
+public sealed class PrivacyContent
+{
+    public string Title { get; init; } = "";
+    public string Lead { get; init; } = "";
+    public string Updated { get; init; } = "";
+    public List<PrivacySection> Sections { get; init; } = [];
+}
+
+public sealed class PrivacySection
+{
+    public string Title { get; init; } = "";
+    public string Text { get; init; } = "";
 }
 
 public sealed class ArticlesContent
@@ -210,4 +231,6 @@ public sealed class ArticlesContent
 public sealed class FooterContent
 {
     public string Tagline { get; init; } = "";
+    // Discreto, na linha do copyright.
+    public string Location { get; init; } = "";
 }

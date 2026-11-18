@@ -1,15 +1,23 @@
-<section class="sec closing">
-    <div class="wrap">
-        <p class="sec-tag">@C.Home.ClosingTag</p>
-        <h2 class="title title-xl">@Rich.Render(C.Home.ClosingTitle)</h2>
-        <p class="lead">@C.Home.ClosingText</p>
-        <div class="actions">
-            <a class="btn btn-light btn-lg" href="/@Lang/contact">@C.Home.CtaPrimary</a>
+<section class="sec closing @(ShowPortrait ? "closing-has-portrait" : "")">
+    <div class="wrap @(ShowPortrait ? "closing-split" : "")">
+        <div>
+            <p class="sec-tag">@C.Home.ClosingTag</p>
+            <h2 class="title title-xl">@Rich.Render(C.Home.ClosingTitle)</h2>
+            <p class="lead">@C.Home.ClosingText</p>
+            <div class="actions">
+                <a class="btn btn-light btn-lg" href="/@Lang/contact">@C.Home.CtaPrimary</a>
+            </div>
         </div>
+        @if (ShowPortrait)
+        {
+            <div class="closing-aside"><Portrait Alt="@C.About.PortraitAlt" /></div>
+        }
     </div>
 </section>
 
 @code {
     [Parameter, EditorRequired] public string Lang { get; set; } = "";
     [Parameter, EditorRequired] public SiteContent C { get; set; } = default!;
+    // Só na Home: o convite para conversar com a pessoa ao lado. Nas outras páginas, só o texto.
+    [Parameter] public bool ShowPortrait { get; set; }
 }

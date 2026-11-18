@@ -1,0 +1,19 @@
+@*
+    Retrato do Teo (fundo transparente). O navegador escolhe 480px ou 960px conforme a tela.
+    Original em assets/brand/teo-avatar-original.png; para regerar, veja assets/brand/README.md.
+*@
+<img class="portrait @Class"
+     src="@Assets["img/teo-480.webp"]"
+     srcset="@Assets["img/teo-480.webp"] 480w, @Assets["img/teo-960.webp"] 960w"
+     sizes="(max-width: 1080px) 210px, 294px"
+     width="480" height="525"
+     alt="@Alt"
+     loading="@(Eager ? "eager" : "lazy")"
+     decoding="async" />
+
+@code {
+    [Parameter, EditorRequired] public string Alt { get; set; } = "";
+    [Parameter] public string? Class { get; set; }
+    // true quando aparece no topo da página (não adiar o carregamento).
+    [Parameter] public bool Eager { get; set; }
+}

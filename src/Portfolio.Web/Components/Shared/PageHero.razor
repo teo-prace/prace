@@ -1,12 +1,19 @@
-<section class="sec hero hero-page">
-    <div class="wrap">
-        <p class="breadcrumb"><a href="/@Lang">@Home</a> / @Crumb</p>
-        <h1 class="display">@Rich.Render(Title)</h1>
-        @if (!string.IsNullOrEmpty(Lead))
+@* Topo das páginas internas. Com Aside, vira duas colunas (texto à esquerda, imagem à direita). *@
+<section class="sec hero hero-page @(Aside is null ? "" : "hero-has-aside")">
+    <div class="wrap @(Aside is null ? "" : "hero-split")">
+        <div>
+            <p class="breadcrumb"><a href="/@Lang">@Home</a> / @Crumb</p>
+            <h1 class="display">@Rich.Render(Title)</h1>
+            @if (!string.IsNullOrEmpty(Lead))
+            {
+                <p class="lead">@Rich.Render(Lead)</p>
+            }
+            @ChildContent
+        </div>
+        @if (Aside is not null)
         {
-            <p class="lead">@Rich.Render(Lead)</p>
+            <div class="hero-aside">@Aside</div>
         }
-        @ChildContent
     </div>
 </section>
 
@@ -17,4 +24,5 @@
     [Parameter, EditorRequired] public string Title { get; set; } = "";
     [Parameter] public string? Lead { get; set; }
     [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public RenderFragment? Aside { get; set; }
 }

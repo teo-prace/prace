@@ -100,7 +100,7 @@ app.MapGet("/sitemap.xml", (HttpContext ctx, ArticleService articles, IOptions<F
     var paths = new List<string>();
     foreach (var lang in ContentService.Languages)
     {
-        paths.AddRange([$"/{lang}", $"/{lang}/services", $"/{lang}/cases", $"/{lang}/about", $"/{lang}/contact"]);
+        paths.AddRange([$"/{lang}", $"/{lang}/services", $"/{lang}/cases", $"/{lang}/about", $"/{lang}/contact", $"/{lang}/privacy"]);
         if (features.Value.Articles && articles.List(lang).Count > 0)
         {
             paths.Add($"/{lang}/articles");

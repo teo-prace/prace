@@ -408,6 +408,9 @@ main { counter-reset: sec; }
 :root[data-logo="bridge"] .brand-mark > [data-v="bridge"],
 :root[data-logo="syne"] .brand-mark > [data-v="syne"],
 :root[data-logo="stacked"] .brand-mark > [data-v="stacked"] { display: block; }
+/* Produção: só uma variante é renderizada; sempre visível. */
+.brand-mark-fixed > [data-v] { display: block; }
+.brand-mark-fixed > [data-v="dot"] { display: inline-flex; }
 
 .brand-mark [data-v="horizontal"] { height: 44px; }
 .brand-mark [data-v="compact"] { height: 32px; }
@@ -569,6 +572,45 @@ main { counter-reset: sec; }
 
 .hero-page .display { max-width: 18ch; }
 .hero-page .lead { margin-bottom: 0; }
+
+/* Retrato (Shared/Portrait.razor): solto na seção, "flutuando" ao lado do texto.
+   A arte corta o blazer reto nas laterais e embaixo; os esmaecimentos disfarçam os cortes. */
+.portrait {
+    display: block;
+    width: 100%;
+    max-width: 294px;
+    height: auto;
+    margin: 0 auto;
+    -webkit-mask-image:
+        linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%),
+        linear-gradient(to bottom, #000 68%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+        linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%),
+        linear-gradient(to bottom, #000 68%, transparent 100%);
+    mask-composite: intersect;
+    /* Espelhado para o rosto ficar virado para o texto (para dentro da página). */
+    scale: -1 1;
+    animation: portrait-float 7s ease-in-out infinite;
+}
+
+/* Sobe e desce poucos pixels, bem devagar. Desligado para quem pede menos movimento. */
+@keyframes portrait-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .portrait { animation: none; }
+}
+
+.hero-split,
+.closing-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    gap: 48px;
+    align-items: center;
+}
 
 /* Card "terminal" de auditoria: sempre escuro, nos dois temas */
 .terminal {
@@ -869,7 +911,24 @@ main { counter-reset: sec; }
 .footer-links a { color: var(--body); font-size: 0.92rem; text-decoration: none; }
 .footer-links a:hover { color: var(--heading); }
 
-.footer-copy { grid-column: 1 / -1; margin: 16px 0 0; padding-top: 24px; border-top: 1px solid var(--line); }
+.footer-copy {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    margin: 16px 0 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+}
+.footer-copy a { text-decoration: none; }
+.footer-copy a:hover { color: var(--heading); }
+
+/* Aviso de privacidade abaixo do botão do formulário */
+.form-note { margin: -6px 0 0; color: var(--muted); font-size: 0.88rem; }
+.form-note a { color: var(--heading); text-underline-offset: 3px; }
+
+.privacy-updated { margin-top: 28px; }
 
 /* ---------- Responsivo ---------- */
 
@@ -878,6 +937,8 @@ main { counter-reset: sec; }
     .mobile-menu { display: block; }
 
     .hero-grid, .split, .contact { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+    .hero-split, .closing-split { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    .portrait { max-width: 210px; margin: 0 auto; }
     .split-intro { position: static; }
     .cell-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

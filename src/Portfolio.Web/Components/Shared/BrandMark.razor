@@ -1,13 +1,15 @@
+@inject IOptions<FeatureOptions> Features
+@inject IOptions<SiteOptions> Site
 @*
-    Logo do header/rodapé. Renderiza todas as variantes e o CSS mostra só a ativa
-    (atributo data-logo no <html>, vindo de Site:Logo ou da escolha feita em /brand).
-    Quando o logo for definido de vez, dá para trocar isto por um único <PraceLogo Variant="..." />.
+    Logo do header. Com o laboratório de marca ligado (/brand, só em Development), renderiza todas as
+    variantes e o CSS mostra a escolhida (atributo data-logo no <html>). Em produção, renderiza só a
+    variante de Site:Logo, para não poluir o texto da página (buscadores, leitores e IAs leem tudo).
 *@
 
-<a class="logo brand-mark @Class" href="/@Lang" aria-label="@(Lang == "pt" ? "Prace — início" : "Prace — home")">
-    @foreach (var v in PraceLogo.Variants)
+<a class="logo brand-mark @(Features.Value.BrandLab ? "" : "brand-mark-fixed") @Class" href="/@Lang" aria-label="@(Lang == "pt" ? "Prace — início" : "Prace — home")">
+    @foreach (var v in Features.Value.BrandLab ? PraceLogo.Variants : [Site.Value.Logo])
     {
-        <PraceLogo Variant="@v" Subtitle="@(Lang == "pt" ? "TEO PRACE · MODERNIZAÇÃO DE LEGADO" : "TEO PRACE · LEGACY MODERNIZATION")" />
+        <PraceLogo Variant="@v" Subtitle="@(Lang == "pt" ? "MODERNIZAÇÃO DE LEGADO" : "LEGACY MODERNIZATION")" />
     }
 </a>
 

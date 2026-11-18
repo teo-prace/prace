@@ -9,6 +9,7 @@
     "articles": "Articles",
     "about": "About",
     "contact": "Contact",
+    "privacy": "Privacy policy",
     "ctaSecondary": "Case studies",
     "ctaPrimary": "Let's talk",
     "switchLanguage": "PT",
@@ -16,11 +17,11 @@
     "menu": "Menu"
   },
   "home": {
-    "title": "Prace · .NET legacy modernization",
-    "description": "Modernizing legacy .NET systems: VB6, WebForms and .NET Framework to modern .NET, in phases, without stopping your operation.",
-    "breadcrumb": "Home / .NET modernization",
-    "headline": "Modernize your legacy .NET system *without stopping your operation.*",
-    "lead": "I move systems built on **VB6**, **ASP.NET WebForms** and **.NET Framework** to **modern .NET**, in small phases, while the current system keeps running. Experience with **mission-critical financial systems**, from a bank's mobile app to a state government's budget system.",
+    "title": "Prace · Legacy Microsoft system modernization",
+    "description": "Modernizing legacy Microsoft systems: VB6, classic ASP, WebForms and .NET Framework to modern .NET, in phases, without stopping your operation.",
+    "breadcrumb": "Home / Legacy modernization",
+    "headline": "Modernize your legacy system *without stopping your operation.*",
+    "lead": "I move systems built on **VB6**, **classic ASP**, **WebForms** and **.NET Framework** to **modern .NET**, in small phases, while the current system keeps running. I've done it in **public finance**, on a system that executes a state government's budget, and I've built a **banking product** from MVP to production.",
     "ctaPrimary": "Let's talk",
     "ctaSecondary": "See how it works",
     "audit": {
@@ -104,7 +105,7 @@
       ]
     },
     "featuredCaseTag": "Featured case study",
-    "featuredCaseTitle": "From *MVP* to a product in production.",
+    "featuredCaseTitle": "Public finance, migrated *without downtime.*",
     "allCases": "See all case studies",
     "latestArticlesTag": "Articles",
     "latestArticlesTitle": "Latest *articles.*",
@@ -117,18 +118,19 @@
     "intro": "I work as a remote contractor, on fixed-scope projects or embedded in your team.",
     "items": [
       {
-        "id": "modernizacao",
+        "id": "modernization",
         "title": "Legacy modernization",
         "summary": "Migrating VB6, classic ASP, WebForms and .NET Framework applications to modern .NET, step by step, while the system keeps running.",
         "bullets": [
           "System assessment and incremental migration plan",
+          "New screens embedded in the old system, with both running side by side during the migration",
           "Migration to ASP.NET Core and current .NET versions",
-          "Containerization with Docker",
+          "CI/CD pipeline and containerization with Docker",
           "Tests that protect the business rules that already work"
         ]
       },
       {
-        "id": "sustentacao",
+        "id": "support",
         "title": "Mission-critical system support",
         "summary": "Maintaining and evolving complex systems with heavy business rules and no room for error.",
         "bullets": [
@@ -138,7 +140,7 @@
         ]
       },
       {
-        "id": "produto",
+        "id": "product",
         "title": "Product development",
         "summary": ".NET development in agile teams, from MVP to production.",
         "bullets": [
@@ -160,31 +162,31 @@
     },
     "items": [
       {
-        "title": "Consortium product in Banrisul's mobile app",
+        "title": "Modernizing a public finance system without disrupting operations",
+        "client": "Public sector · State public finance",
+        "context": "A strategic system, in operation for decades, that runs budget execution for a Brazilian state. It is maintained by dozens of professionals, follows accounting rules defined by law, and its releases are tested and audited by the state.",
+        "challenge": "Move critical modules from VB6, ASP and SQL Server to .NET 10 and Angular without interrupting budget execution and without a single discrepancy in the accounting figures.",
+        "solution": "I served as reviewer and architect for the migration of the budget commitment and payment approval modules, with the new screens integrated into the legacy system and both running in parallel during the transition. I bridged the legacy and modern .NET teams when defining the shared components. On the architecture team, I worked with CI/CD pipelines, Docker, Kubernetes, production monitoring and incident management.",
+        "result": "Incremental migration with no downtime and zero accounting discrepancies, approved by the state's audit office. On the operations side, a documented ownership map made incident routing faster.",
+        "tags": [ "VB6", "ASP", "SQL Server", ".NET 10", "Angular", "CI/CD", "Docker", "Kubernetes" ]
+      },
+      {
+        "title": "Geolocated site inspections on a BIM platform",
+        "client": "Construmarket · Construction",
+        "context": "I worked in the BIM (Building Information Modeling) area of Construmarket, a construction technology company focused on digitizing construction projects.",
+        "challenge": "Make field inspections reliable, using location data to confirm that each site visit actually took place on site, and restructure a database that packed too much information into too few tables.",
+        "solution": "I contributed to the application as a whole, with AngularJS on the front end and .NET Core on the back end. I helped geotag inspections on Google Maps using GPS from the mobile devices used in the field, and took part in normalizing the database, with changes versioned through Entity Framework Migrations.",
+        "result": "Inspections recorded with their location and visible on the map, making it possible to verify that each visit happened on site, and a database that is more consistent and easier to evolve.",
+        "tags": [ ".NET Core", "AngularJS", "Entity Framework", "Google Maps", "GPS", "BIM" ]
+      },
+      {
+        "title": "Digital consortium product in Banrisul's mobile app",
         "client": "Banrisul · Banking",
-        "context": "Banrisul, a Brazilian bank, did not offer consortium plans (a Brazilian group-purchase financing product) in its mobile app.",
-        "challenge": "Build a new digital product line from scratch in a banking environment, with high security and quality requirements.",
-        "solution": "I worked on it for 2 years, from MVP to product, in a Scrum team, presenting deliveries to stakeholders.",
-        "result": "The feature shipped, became a product and is still in production.",
-        "tags": [ "MVP", "Scrum", "Banking" ]
-      },
-      {
-        "title": "State budget execution system",
-        "client": "Public sector · Public finance",
-        "context": "A Brazilian state's public finance system, responsible for executing expenditures within the approved budget.",
-        "challenge": "A large, mission-critical system built over many years across several technologies, with complex business rules.",
-        "solution": "I maintain and evolve the system, working with VB6, VB.NET, C#, .NET Framework and ASP.NET WebForms.",
-        "result": "Continuity of an essential public management process.",
-        "tags": [ "VB6", "VB.NET", "C#", ".NET Framework", "WebForms" ]
-      },
-      {
-        "title": "Maps for the construction industry",
-        "client": "Constru Marketing · Construction",
-        "context": "A marketing company focused on the construction industry.",
-        "challenge": "Provide an interactive maps feature inside the company's application.",
-        "solution": "I built the maps feature with AngularJS on the front end and .NET Core with Entity Framework Migrations on the back end.",
-        "result": "Maps feature integrated into the application.",
-        "tags": [ ".NET Core", "Entity Framework", "AngularJS" ]
+        "context": "Banrisul's mobile app did not yet offer consortium plans (a Brazilian group-purchase financing product), and the product needed to reach the bank's digital channel.",
+        "challenge": "Build a new digital product line from scratch in a banking environment, with high security, quality and compliance requirements.",
+        "solution": "I worked on it for 2 years, from MVP to product, in a Scrum team: backlog refinement with the business, incremental releases and regular demos to stakeholders.",
+        "result": "The feature launched, became one of the bank's products and is still in production.",
+        "tags": [ "MVP", "Scrum", "Digital product", "Banking" ]
       }
     ]
   },
@@ -195,22 +197,30 @@
   },
   "about": {
     "title": "Prace is *Teo's work.*",
-    "lead": "*Práce* means \"work\" in Czech. It's what I do for systems nobody else wants to touch.",
+    "lead": "Systems analyst specializing in Microsoft technologies, from **VB6** to **.NET 10**.",
+    "portraitAlt": "Illustrated portrait of Teo in a navy blazer and white T-shirt",
     "paragraphs": [
-      "I'm a .NET developer who works on systems that need to run every single day: in banking, I worked on Banrisul's consortium feature from MVP to product; in the public sector, I maintain a state budget execution system.",
-      "This path gave me experience on both ends of .NET: from VB6, classic ASP and WebForms to .NET Core and Entity Framework. That's exactly what a modernization project needs.",
-      "I like to understand the business rules before the code, and to explain technical decisions in plain language to the people who make the calls."
+      "I'm Mateus Prado Ceccagno, a **.NET** **developer** experienced in mission-critical systems, where availability and accuracy are business requirements. In the public sector, I work on a public finance system that executes the budget of a Brazilian state, with accounting rules defined by law and releases audited by the state. In banking, I built Banrisul's consortium feature from **MVP** to product. In civil construction, I worked with GPS geolocation, Google Maps integrations and data normalization.",
+      "On the public finance system, I started with legacy maintenance (VB6, VB.NET, ASP, ASP.NET and SQL Server), which gave me deep command of the business rules. Over time, I also took on CI/CD pipelines, production monitoring, Docker and Kubernetes, and served as reviewer and architect for the migration of critical modules to .NET 10 and Angular, without interrupting the system and with zero accounting discrepancies.",
+      "My most common role is the **bridge**: I move between the people who know the legacy system and the people who work with modern .NET, and I help decide what must be preserved and what can change.",
+      "I'm also deputy tech lead of a six-person team, and I helped standardize FinOps practices in my department.",
+      "I prioritize understanding the business rules before writing code, and I translate technical decisions into plain language for the people who make the calls.",
+      "*Prace* comes from my surname, **Pra**do **Ce**ccagno, and *Teo* from Mateus."
     ],
     "stackTag": "Technologies",
     "stackTitle": "From *VB6* to modern .NET.",
     "stack": [
       {
-        "name": "Professional experience",
-        "items": [ "C#", ".NET Core", ".NET Framework", "VB.NET", "VB6", "ASP.NET WebForms", "Classic ASP", "Entity Framework", "AngularJS", "HTML & CSS", "Scrum" ]
+        "name": "Development",
+        "items": [ "C#", ".NET 10", ".NET Framework", "VB.NET", "VB6", "Classic ASP", "ASP.NET WebForms", "SQL Server", "Entity Framework", "Angular", "AngularJS" ]
+      },
+      {
+        "name": "Architecture and operations",
+        "items": [ "CI/CD", "Docker", "Kubernetes", "Monitoring", "FinOps", "Scrum" ]
       },
       {
         "name": "Study and personal projects",
-        "items": [ "Docker", "Kubernetes", "Modern ASP.NET Core", "Blazor" ]
+        "items": [ "Blazor", "Azure Container Apps", "Bicep", "GitHub Actions" ]
       }
     ],
     "howTag": "How I work",
@@ -233,7 +243,8 @@
     "failure": "Couldn't send right now. Please try again or use one of the contacts on the side.",
     "required": "Required field.",
     "invalidEmail": "Invalid email.",
-    "directTitle": "Or reach out directly"
+    "directTitle": "Or reach out directly",
+    "privacyNote": "Your data is only used to reply to you. See the"
   },
   "articles": {
     "title": "Articles",
@@ -243,7 +254,39 @@
     "backToList": "All articles",
     "draft": "Draft"
   },
+  "privacy": {
+    "title": "Privacy *policy.*",
+    "lead": "How the data you send through this site is handled, in plain language.",
+    "updated": "Last updated November 17, 2026.",
+    "sections": [
+      {
+        "title": "Who is responsible",
+        "text": "This site is run by Mateus Prado Ceccagno (Prace). For anything about your data, write to teo@prace.dev."
+      },
+      {
+        "title": "What data is collected",
+        "text": "Only what you send through the contact form: name, email and message. The site uses no tracking or advertising cookies. For security, the hosting provider may log technical access data, such as IP address and time, for up to 30 days."
+      },
+      {
+        "title": "What it is used for",
+        "text": "Only to reply to you and talk about your project. Your data is not sold, not used for marketing, and you won't be added to any mailing list."
+      },
+      {
+        "title": "Who it is shared with",
+        "text": "With the services needed to run the site: hosting (Microsoft Azure, in Brazil) and email delivery. They process the data only for that purpose."
+      },
+      {
+        "title": "How long it is kept",
+        "text": "For as long as the conversation and any resulting work relationship require. You can ask for deletion at any time."
+      },
+      {
+        "title": "Your rights",
+        "text": "Under Brazil's data protection law (LGPD) and similar laws, you can request access to, correction or deletion of your data by writing to teo@prace.dev. You'll get a reply within 15 days."
+      }
+    ]
+  },
   "footer": {
-    "tagline": "I modernize legacy .NET systems without stopping operations."
+    "tagline": "I modernize legacy Microsoft systems without stopping operations.",
+    "location": "Porto Alegre, Brazil · UTC−3"
   }
 }

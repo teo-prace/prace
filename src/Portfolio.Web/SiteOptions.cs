@@ -4,6 +4,8 @@ namespace Portfolio.Web;
 public sealed class SiteOptions
 {
     public string Brand { get; set; } = "";
+    // Nome completo do responsável (rodapé). Quando houver CNPJ, pode virar a razão social.
+    public string Owner { get; set; } = "";
     public string Email { get; set; } = "";
     public string LinkedInUrl { get; set; } = "";
     public string GitHubUrl { get; set; } = "";
