@@ -28,6 +28,12 @@ param minReplicas int = 1
 @description('Teto diário de logs em GB. Acima disso o Azure para de gravar logs até o dia seguinte (protege a fatura).')
 param logsDailyQuotaGb string = '0.2'
 
+@description('Domínio próprio já validado. Vazio = sem domínio próprio.')
+param customDomain string = 'prace.dev'
+
+@description('Nome do certificado gerenciado do domínio no ambiente.')
+param customDomainCertificateName string = 'mc-portfolio-env-prace-dev-2088'
+
 var emailEnabled = !empty(resendApiKey) && !empty(emailFrom) && !empty(emailTo)
 
 resource logs 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
@@ -68,6 +74,13 @@ resource app 'Microsoft.App/containerApps@2024-03-01' = {
         targetPort: 8080
         transport: 'auto'
         allowInsecure: false
+        customDomains: empty(customDomain) ? [] : [
+          {
+            name: customDomain
+            bindingType: 'SniEnabled'
+            certificateId: '${env.id}/managedCertificates/${customDomainCertificateName}'
+          }
+        ]
       }
       secrets: emailEnabled ? [
         { name: 'resend-api-key', value: resendApiKey }

@@ -102,6 +102,12 @@ az containerapp hostname bind --hostname www.seudominio.com.br -g rg-portfolio -
   --environment portfolio-env --validation-method CNAME
 ```
 
+> **Atenção:** depois de ligar o domínio, confira se `customDomain` e `customDomainCertificateName`
+> em `infra/main.bicep` batem com o que está no Azure
+> (`az containerapp env certificate list -g rg-portfolio -n portfolio-env --managed-certificates-only -o table`).
+> Rodar `az deployment group create` com o Bicep desatualizado **desliga o domínio**.
+> Para só trocar a versão do site, use `az containerapp update --image` (é o que o GitHub Actions faz).
+
 ## 6. E-mail do formulário (Resend)
 
 1. Crie a conta em https://resend.com e verifique seu domínio (registros DNS que eles indicam).

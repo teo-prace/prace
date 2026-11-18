@@ -38,9 +38,18 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-          docker build -t "${{ steps.name.outputs.image }}" -t "ghcr.io/${GITHUB_REPOSITORY,,}:latest" .
-          docker push --all-tags "ghcr.io/${GITHUB_REPOSITORY,,}"
+      - name: Build
+        run: docker build -t "${{ steps.name.outputs.image }}" -t "ghcr.io/${GITHUB_REPOSITORY,,}:latest" .
+
+      # Contêiner local e testa antes de publicar.
+      - name: Smoke test do contêiner
+        run: |
+          docker run -d --name smoke -p 8080:8080 "${{ steps.name.outputs.image }}"
+          bash .github/scripts/smoke.sh http://localhost:8080 12 || { docker logs smoke; exit 1; }
+          docker rm -f smoke
+
+      - name: Publicar
+        run: docker push --all-tags "ghcr.io/${GITHUB_REPOSITORY,,}"
 
   # 3. Atualiza o site no Azure (só roda depois de configurar o Azure; veja docs/azure.md)
   deploy:
@@ -51,14 +60,35 @@ jobs:
       id-token: write
       contents: read
     environment: production
+    env:
+      APP: ${{ vars.AZURE_CONTAINERAPP_NAME }}
+      RG: ${{ vars.AZURE_RESOURCE_GROUP }}
+      # Endereço público testado depois do deploy (variável SITE_URL no GitHub; padrão prace.dev).
+      SITE_URL: ${{ vars.SITE_URL || 'https://prace.dev' }}
     steps:
+      - uses: actions/checkout@v4
       - uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      - run: |
-          az containerapp update \
-            --name "${{ vars.AZURE_CONTAINERAPP_NAME }}" \
-            --resource-group "${{ vars.AZURE_RESOURCE_GROUP }}" \
-            --image "${{ needs.image.outputs.image }}"
+
+      # Guarda a versão que está no ar, para poder voltar.
+      - name: Versão atual
+        id: current
+        run: echo "image=$(az containerapp show -n "$APP" -g "$RG" --query 'properties.template.containers[0].image' -o tsv)" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy
+        run: az containerapp update -n "$APP" -g "$RG" --image "${{ needs.image.outputs.image }}" -o none
+
+      # Testa o site. Até ~2 minutos para a versão nova assumir.
+      - name: Smoke test em produção
+        run: bash .github/scripts/smoke.sh "$SITE_URL" 12
+
+      # Se teste falhou, volta para a versão anterior.
+      - name: Rollback
+        if: failure() && steps.current.outputs.image != ''
+        run: |
+          echo "Voltando para ${{ steps.current.outputs.image }}"
+          az containerapp update -n "$APP" -g "$RG" --image "${{ steps.current.outputs.image }}" -o none
+          bash .github/scripts/smoke.sh "$SITE_URL" 12
