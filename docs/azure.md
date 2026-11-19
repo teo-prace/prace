@@ -127,9 +127,34 @@ az deployment group create -g rg-portfolio --template-file infra/main.bicep `
 
 A chave fica como **secret** no Azure. Nunca coloque no `appsettings.json` nem no Git.
 
-## 7. Alerta de orçamento (recomendado)
+## 7. Proteção de custo
 
-No portal do Azure: **Cost Management → Budgets → Add**, valor um pouco acima do esperado (ex.: US$ 20/mês), com alerta por e-mail em 50%, 80% e 100%.
+A assinatura é Pay-As-You-Go: o Azure **não tem trava de gasto**, só avisos. Por isso são três camadas.
+Atenção: a conta é cobrada em **BRL**; todos os valores abaixo estão na moeda da conta.
+
+**a) Orçamento com alerta** (`orcamento-mensal`, por API; `az consumption budget list` não mostra):
+e-mail para teo@prace.dev em 50%, 80% e 100% do gasto real e 100% da previsão do mês.
+
+**b) Política "Somente recursos do site Prace"** (`tipos-permitidos`, regra pronta "Allowed resource types"):
+na assinatura só podem ser criados Container Apps, o ambiente, certificados e Log Analytics.
+Erro `RequestDisallowedByPolicy` = essa política. Para liberar um tipo novo, recrie a atribuição com a lista atualizada.
+
+**c) Guarda de custo** (`.github/workflows/cost-guard.yml`): a cada 6 h lê o gasto do mês e, se passar de
+`COST_LIMIT` (variável do GitHub, padrão 120), bloqueia todo acesso e zera as instâncias. Domínio e certificado
+continuam configurados. O workflow falha de propósito para o GitHub mandar e-mail.
+
+- Religar: **Actions → Guarda de custo → Run workflow → religar**.
+- Testar o desligamento: mesmo caminho, opção **desligar** (depois **religar**).
+- Requisito, uma vez só: a identidade do deploy precisa ler custos.
+
+```powershell
+$sub = az account show --query id -o tsv
+$sp  = az ad sp show --id <AZURE_CLIENT_ID> --query id -o tsv
+az role assignment create --assignee-object-id $sp --assignee-principal-type ServicePrincipal `
+  --role "Cost Management Reader" --scope "/subscriptions/$sub"
+```
+
+O custo no Azure chega com 8 a 24 h de atraso; a guarda limita o estrago, não zera.
 
 ## Observações
 

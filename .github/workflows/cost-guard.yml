@@ -1,0 +1,71 @@
+name: Guarda de custo
+
+# Requer o papel "Cost Management Reader" na assinatura (docs/azure.md, seção 7).
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      acao:
+        type: choice
+        options: [verificar, desligar, religar]
+        default: verificar
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: cost-guard
+
+jobs:
+  guard:
+    if: vars.AZURE_CONTAINERAPP_NAME != ''
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      APP: ${{ vars.AZURE_CONTAINERAPP_NAME }}
+      RG: ${{ vars.AZURE_RESOURCE_GROUP }}
+      LIMIT: ${{ vars.COST_LIMIT || '120' }}
+      ACAO: ${{ inputs.acao || 'verificar' }}
+      SUB: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    steps:
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Religar
+        if: env.ACAO == 'religar'
+        run: |
+          az containerapp ingress access-restriction remove -n "$APP" -g "$RG" --rule-name guarda-de-custo -o none || true
+          az containerapp update -n "$APP" -g "$RG" --min-replicas 1 --max-replicas 1 -o none
+
+      - name: Gasto do mês
+        id: cost
+        if: env.ACAO == 'verificar'
+        run: |
+          body='{"type":"ActualCost","timeframe":"MonthToDate","dataset":{"granularity":"None","aggregation":{"totalCost":{"name":"Cost","function":"Sum"}}}}'
+          url="https://management.azure.com/subscriptions/$SUB/providers/Microsoft.CostManagement/query?api-version=2023-11-01"
+          # A API de custo devolve 429 com frequência.
+          for i in 1 2 3 4 5; do
+            out=$(az rest --method post --url "$url" --body "$body" -o json) && break
+            out=""; sleep $((i * 30))
+          done
+          [ -n "$out" ] || exit 1
+          cost=$(jq -r '.properties.rows[0][0] // 0' <<< "$out")
+          cur=$(jq -r '.properties.rows[0][1] // ""' <<< "$out")
+          echo "### $cost $cur (limite $LIMIT)" >> "$GITHUB_STEP_SUMMARY"
+          awk -v c="$cost" -v l="$LIMIT" 'BEGIN { print "over=" (c > l ? "true" : "false") }' >> "$GITHUB_OUTPUT"
+
+      # Desativar o ingress apagaria o domínio customizado; por isso a restrição de IP.
+      - name: Desligar
+        if: env.ACAO == 'desligar' || steps.cost.outputs.over == 'true'
+        run: |
+          az containerapp ingress access-restriction set -n "$APP" -g "$RG" --rule-name guarda-de-custo \
+            --ip-address 127.0.0.1/32 --action Allow -o none
+          az containerapp update -n "$APP" -g "$RG" --min-replicas 0 -o none
+          echo "::error::Site desligado pela guarda de custo."
+          exit 1
