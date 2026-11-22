@@ -836,6 +836,20 @@ main { counter-reset: sec; }
 .article-body pre { overflow-x: auto; padding: 20px 22px; border: 1px solid var(--line); background: #15191D; color: #F2F2F2; }
 .article-body pre code { padding: 0; border: 0; background: none; color: inherit; }
 
+/* Roadmap nos artigos: lista numerada com uma linha vertical. "done" = feito, "next" = próximo. */
+.article-body .roadmap { list-style: none; margin: 28px 0 36px; padding: 0; border-left: 1px solid var(--line); }
+.article-body .roadmap li { position: relative; padding: 0 0 28px 28px; }
+.article-body .roadmap li:last-child { padding-bottom: 0; }
+.article-body .roadmap li::before { content: ""; position: absolute; left: -5px; top: 5px; width: 9px; height: 9px; border: 1px solid var(--accent); background: var(--accent); }
+.article-body .roadmap li.next::before { background: var(--bg); border-color: var(--muted); }
+.article-body .roadmap h3 { margin: 6px 0 6px; font-size: 1.15rem; }
+.article-body .roadmap p { margin: 0; font-size: 1.02rem; line-height: 1.7; }
+.article-body .roadmap li.next h3,
+.article-body .roadmap li.next p { color: var(--muted); }
+.article-body table { width: 100%; margin: 24px 0 28px; border-collapse: collapse; font-size: 1rem; }
+.article-body th, .article-body td { padding: 10px 12px; border-bottom: 1px solid var(--line-soft); text-align: left; vertical-align: top; color: var(--body); }
+.article-body th { color: var(--heading); font-weight: 600; border-bottom-color: var(--line); }
+
 .badge {
     padding: 2px 7px;
     border-radius: var(--radius);
