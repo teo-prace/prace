@@ -5,6 +5,14 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+    <!-- Em Debug, o Visual Studio inicia pelo dotnet.exe (assinado) em vez do Portfolio.Web.exe gerado no build:
+         o Smart App Control do Windows 11 bloqueia esse .exe sem assinatura de forma intermitente.
+         Não afeta a publicação (Release) nem a imagem Docker, que já inicia com "dotnet Portfolio.Web.dll". -->
+    <UseAppHost Condition="'$(Configuration)' == 'Debug'">false</UseAppHost>
+    <!-- O Smart App Control decide pelo conteúdo do arquivo, e o build determinístico gera sempre o mesmo
+         Portfolio.Web.dll para o mesmo código: um arquivo barrado continuava barrado em todo rebuild.
+         Em Debug, cada build gera um arquivo diferente; se for bloqueado, recompilar resolve. -->
+    <Deterministic Condition="'$(Configuration)' == 'Debug'">false</Deterministic>
   </PropertyGroup>
 
   <ItemGroup>
