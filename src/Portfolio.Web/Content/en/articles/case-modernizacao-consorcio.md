@@ -3,7 +3,7 @@ title: Demo case: modernizing a consórcio system without stopping it
 summary: A complete legacy system, from VB6 to WebForms, moved to .NET 10 one screen at a time, with the old system running the whole time. The code is open.
 date: 2026-11-22
 tags: Case, WebForms, VB6, .NET 10, Blazor
-draft: true
+draft: false
 ---
 
 > **Fictional company, realistic system.** CeCons Administradora de Consórcios does not exist. The system

@@ -3,7 +3,7 @@ title: Case demonstrativo: modernizando um sistema de consórcio sem parar a ope
 summary: Um sistema legado completo, de VB6 a WebForms, migrado para .NET 10 uma tela por vez, com o sistema antigo no ar o tempo todo. O código está aberto.
 date: 2026-11-22
 tags: Case, WebForms, VB6, .NET 10, Blazor
-draft: true
+draft: false
 ---
 
 > **Empresa fictícia, sistema realista.** A CeCons Administradora de Consórcios não existe. O sistema foi
