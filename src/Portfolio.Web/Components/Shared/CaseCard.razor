@@ -19,6 +19,10 @@
             }
         </ul>
     }
+    @if (!string.IsNullOrEmpty(Item.Link) && !string.IsNullOrEmpty(Item.LinkText))
+    {
+        <p class="case-link"><a class="btn btn-ghost" href="@Item.Link">@Item.LinkText →</a></p>
+    }
 </article>
 
 @code {

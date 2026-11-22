@@ -148,6 +148,9 @@ public sealed class CaseItem
     public string Solution { get; init; } = "";
     public string Result { get; init; } = "";
     public List<string> Tags { get; init; } = [];
+    // Opcionais: link para saber mais (artigo, repositório). Os dois juntos ou nenhum.
+    public string? Link { get; init; }
+    public string? LinkText { get; init; }
 }
 
 // Só aparece no site quando houver itens. Use apenas depoimentos reais, com autorização.
