@@ -6,7 +6,8 @@ tags: Case, WebForms, VB6, .NET 10, Blazor
 draft: false
 ---
 
-> **Fictional company, realistic system.** CeCons Administradora de Consórcios does not exist. The system
+> **Fictional company, realistic system.** CeCons Administradora de Consórcios does not exist. Company, data
+> and rules are fictional, created for demonstration from public law. The system
 > was built to show the method on a legacy system with real weight: Brazilian consórcio rules (a group
 > purchasing scheme regulated by Law 11.795/2008), 25 tables, 26 stored procedures, a batch, a customer
 > portal, COM components, and the problems that pile up in twenty years of maintenance. All the code is on
