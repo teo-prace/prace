@@ -779,6 +779,7 @@ main { counter-reset: sec; }
 .case-list { display: grid; gap: 40px; }
 
 .case-card { border: 1px solid var(--line); background: var(--card); }
+.case-link { margin: 0; padding: 0 32px 28px; }
 
 .case-head { padding: 28px 32px 24px; border-bottom: 1px solid var(--line-soft); }
 .case-head h3 { margin: 10px 0 0; font-size: 1.45rem; letter-spacing: -0.02em; line-height: 1.25; }
