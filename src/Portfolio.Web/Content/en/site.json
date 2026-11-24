@@ -21,7 +21,7 @@
     "description": "Modernizing legacy Microsoft systems: VB6, classic ASP, WebForms and .NET Framework to modern .NET, in phases, without stopping your operation.",
     "breadcrumb": "Home / Legacy modernization",
     "headline": "Modernize your legacy system *without stopping your operation.*",
-    "lead": "I move systems built on **VB6**, **classic ASP**, **WebForms** and **.NET Framework** to modern .NET, in small phases, while the current system keeps running. I have experience with **mission-critical systems** in the public sector, and I've built a banking product from MVP to production.",
+    "lead": "I move systems built on **VB6**, **classic ASP**, **WebForms** and **.NET Framework** to modern .NET, in small phases, while the current system keeps running. Experience with **mission-critical financial systems** in production, from MVP to decades-old legacy.",
     "ctaPrimary": "Let's talk",
     "ctaSecondary": "See how it works",
     "audit": {
@@ -115,7 +115,7 @@
   },
   "services": {
     "title": "Services for *mission-critical systems.*",
-    "intro": "Remote, fixed-scope projects.",
+    "intro": "Remote, fixed-scope projects for private companies running legacy Microsoft systems: banks and fintechs, manufacturing, retail and services.",
     "items": [
       {
         "id": "modernization",
@@ -174,15 +174,6 @@
         "linkText": "Read the full case"
       },
       {
-        "title": "A public finance system in continuous operation",
-        "client": "Professional experience · Public sector",
-        "context": "A strategic budget execution system, in operation for decades, with rules defined by law.",
-        "challenge": "Evolve and modernize a system that can't stop and allows no discrepancy in the figures.",
-        "solution": "I work on legacy maintenance and on the migration to modern .NET, bridging the people who know the old system and the people working with the new technology. I also work with CI/CD pipelines, containers and production monitoring.",
-        "result": "Hands-on experience with **incremental modernization while the system runs in production**, which is the basis of the method I use.",
-        "tags": [ "VB6", "ASP", "SQL Server", ".NET", "CI/CD", "Docker" ]
-      },
-      {
         "title": "Geolocated site inspections on a BIM platform",
         "client": "Professional experience · Construmarket · Construction",
         "context": "I worked in the BIM (Building Information Modeling) area of Construmarket, a construction technology company focused on digitizing construction projects.",
@@ -212,8 +203,8 @@
     "lead": "Systems analyst specializing in Microsoft technologies, from **VB6** to **.NET 10**.",
     "portraitAlt": "Illustrated portrait of Teo in a navy blazer and white T-shirt",
     "paragraphs": [
-      "I'm Mateus Prado Ceccagno, a **.NET developer**. I've worked in technology **since 2020**, with experience in mission-critical systems, where availability and accuracy are business requirements. In the public sector, I work on a public finance system with rules defined by law. In civil construction, I worked with GPS geolocation, Google Maps integrations and data normalization. In banking, I built **Banrisul**'s consortium feature from MVP to product.",
-      "In the public sector, I started with legacy maintenance (VB6, VB.NET, ASP, ASP.NET and SQL Server), which gave me command of complex business rules. Over time, I also took on CI/CD pipelines, production monitoring and containers, and **incremental modernization** to modern .NET, with the system in operation.",
+      "I'm Mateus Prado Ceccagno, a **.NET developer**. I've worked in technology **since 2020**, with experience in mission-critical systems, where availability and accuracy are business requirements. In civil construction, I worked with GPS geolocation, Google Maps integrations and data normalization. In banking, I built **Banrisul**'s consortium feature from MVP to product.",
+      "I also have experience with large public-sector legacy systems (VB6, ASP, VB.NET, SQL Server), which gave me command of complex business rules.",
       "My most common role is the **bridge**: I move between the people who know the legacy system and the people who work with modern .NET, and I help decide what must be preserved and what can change. Throughout my career, I've also taught and supported colleagues and taken part in FinOps working groups.",
       "I prioritize understanding the business rules before writing code, and I translate technical decisions into plain language for the people who make the calls.",
       "*Prace* comes from my surname, **Pra**do **Ce**ccagno, and *Teo* from Mateus."

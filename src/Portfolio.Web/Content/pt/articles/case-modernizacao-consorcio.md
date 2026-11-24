@@ -6,7 +6,8 @@ tags: Case, WebForms, VB6, .NET 10, Blazor
 draft: false
 ---
 
-> **Empresa fictícia, sistema realista.** A CeCons Administradora de Consórcios não existe. O sistema foi
+> **Empresa fictícia, sistema realista.** A CeCons Administradora de Consórcios não existe. Empresa, dados e
+> regras fictícios, criados para demonstração a partir da legislação pública. O sistema foi
 > construído para mostrar o método num legado com peso de verdade: regras de consórcio da Lei 11.795/2008,
 > 25 tabelas, 26 procedures, batch, portal do consorciado, componentes COM e os problemas que se acumulam
 > em vinte anos de manutenção. Todo o código está no

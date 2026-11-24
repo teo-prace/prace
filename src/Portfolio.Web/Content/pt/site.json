@@ -21,7 +21,7 @@
     "description": "Modernização de sistemas legados Microsoft: VB6, ASP clássico, WebForms e .NET Framework para o .NET moderno, em fases e sem parar a operação.",
     "breadcrumb": "Início / Modernização de legado",
     "headline": "Modernize seu sistema legado *sem parar a operação.*",
-    "lead": "Levo sistemas em **VB6**, **ASP clássico**, **WebForms** e **.NET Framework** para o .NET moderno, em fases pequenas, enquanto o sistema atual continua rodando. Tenho experiência com **sistemas críticos** no setor público e construí produto bancário do MVP à produção.",
+    "lead": "Levo sistemas em **VB6**, **ASP clássico**, **WebForms** e **.NET Framework** para o .NET moderno, em fases pequenas, enquanto o sistema atual continua rodando. Experiência com **sistemas financeiros críticos** em produção, do MVP ao legado de décadas.",
     "ctaPrimary": "Vamos conversar",
     "ctaSecondary": "Ver como funciona",
     "audit": {
@@ -115,7 +115,7 @@
   },
   "services": {
     "title": "Serviços para *sistemas críticos.*",
-    "intro": "Projetos remotos, com escopo fechado.",
+    "intro": "Projetos remotos, com escopo fechado, para empresas privadas com sistemas legados Microsoft: bancos e financeiras, indústria, varejo e serviços.",
     "items": [
       {
         "id": "modernizacao",
@@ -174,15 +174,6 @@
         "linkText": "Ler o case completo"
       },
       {
-        "title": "Sistema de finanças públicas em operação contínua",
-        "client": "Experiência profissional · Setor público",
-        "context": "Sistema estratégico de execução orçamentária, em operação há décadas, com regras definidas em lei.",
-        "challenge": "Evoluir e modernizar um sistema que não pode parar e não admite divergência de valores.",
-        "solution": "Atuo na manutenção do legado e na migração para o .NET moderno, fazendo a ponte entre quem conhece o sistema antigo e quem trabalha com a tecnologia nova. Também trabalho com pipelines de CI/CD, contêineres e monitoramento em produção.",
-        "result": "Experiência prática de **modernização incremental com o sistema em produção**, que é a base do método que uso.",
-        "tags": [ "VB6", "ASP", "SQL Server", ".NET", "CI/CD", "Docker" ]
-      },
-      {
         "title": "Inspeção de obras com geolocalização em BIM",
         "client": "Experiência profissional · Construmarket · Construção civil",
         "context": "Atuei na área de BIM (Building Information Modeling) da Construmarket, empresa de tecnologia para a construção civil focada na digitalização de obras.",
@@ -213,8 +204,8 @@
     "lead": "Analista de computação, especialista em tecnologias Microsoft: do **VB6** ao **.NET 10**.",
     "portraitAlt": "Retrato ilustrado do Teo, de blazer azul-marinho e camiseta branca",
     "paragraphs": [
-      "Sou Mateus Prado Ceccagno, **desenvolvedor .NET**. Atuo com tecnologia **desde 2020**, com experiência em sistemas críticos, em que disponibilidade e precisão são requisitos do negócio. No setor público, trabalho num sistema de finanças públicas, com regras definidas em lei. Na construção civil, trabalhei com geolocalização por GPS, integrações com o Google Maps e normalização de dados. No setor bancário, construí do MVP ao produto a funcionalidade de consórcio do app do **Banrisul**.",
-      "No setor público, comecei pela manutenção do legado (VB6, VB.NET, ASP, ASP.NET e SQL Server), o que me deu domínio de regras de negócio complexas. Com o tempo, passei a atuar também com pipelines de CI/CD, monitoramento em produção e contêineres, e na **modernização incremental** para o .NET moderno, com o sistema em operação.",
+      "Sou Mateus Prado Ceccagno, **desenvolvedor .NET**. Atuo com tecnologia **desde 2020**, com experiência em sistemas críticos, em que disponibilidade e precisão são requisitos do negócio. Na construção civil, trabalhei com geolocalização por GPS, integrações com o Google Maps e normalização de dados. No setor bancário, construí do MVP ao produto a funcionalidade de consórcio do app do **Banrisul**.",
+      "Também tenho experiência com sistemas legados de grande porte no setor público (VB6, ASP, VB.NET, SQL Server), o que me deu domínio de regras de negócio complexas.",
       "Meu papel mais frequente é o de **ponte**: transito entre quem conhece o legado e quem trabalha com o .NET moderno, e ajudo a decidir o que precisa ser preservado e o que pode mudar. Ao longo da carreira, também ensinei e apoiei colegas e participei de grupos de trabalho de FinOps.",
       "Priorizo entender a regra de negócio antes de escrever código e traduzo decisões técnicas em linguagem clara para quem decide.",
       "*Prace* vem do meu sobrenome, **Pra**do **Ce**ccagno, e *Teo*, de Mateus."
